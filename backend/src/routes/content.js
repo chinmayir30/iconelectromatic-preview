@@ -43,6 +43,74 @@ export function generateContentEtag(pageKey, updatedAt = null) {
 }
 
 /**
+ * Validate content structure and fields according to page-specific constraints.
+ * @param {string} pageKey
+ * @param {any} content
+ * @returns {{ valid: boolean, error?: string }}
+ */
+export function validateContentPayload(pageKey, content) {
+  if (content === undefined || content === null || typeof content !== "object") {
+    return { valid: false, error: "Request body must include a valid 'content' object or array." };
+  }
+
+  if (pageKey === "home" && !Array.isArray(content)) {
+    if (content.eventsTitle !== undefined) {
+      if (typeof content.eventsTitle !== "string" || content.eventsTitle.length > 200) {
+        return { valid: false, error: "'eventsTitle' must be a string up to 200 characters." };
+      }
+    }
+    if (content.eventsSubtitle !== undefined) {
+      if (typeof content.eventsSubtitle !== "string" || content.eventsSubtitle.length > 300) {
+        return { valid: false, error: "'eventsSubtitle' must be a string up to 300 characters." };
+      }
+    }
+    if (content.eventsLead !== undefined) {
+      if (typeof content.eventsLead !== "string" || content.eventsLead.length > 2000) {
+        return { valid: false, error: "'eventsLead' must be a string up to 2000 characters." };
+      }
+    }
+    if (content.eventCards !== undefined) {
+      if (!Array.isArray(content.eventCards)) {
+        return { valid: false, error: "'eventCards' must be an array." };
+      }
+      if (content.eventCards.length > 30) {
+        return { valid: false, error: "'eventCards' cannot exceed 30 items." };
+      }
+      for (let i = 0; i < content.eventCards.length; i++) {
+        const card = content.eventCards[i];
+        if (!card || typeof card !== "object" || Array.isArray(card)) {
+          return { valid: false, error: `eventCards[${i}] must be an object.` };
+        }
+        if (card.image !== undefined) {
+          if (typeof card.image !== "string" || card.image.length > 2048) {
+            return { valid: false, error: `eventCards[${i}].image must be a string URL up to 2048 characters.` };
+          }
+          const trimmedImg = card.image.trim();
+          if (/^(?:javascript|vbscript):/i.test(trimmedImg) || /^data:(?!image\/)/i.test(trimmedImg)) {
+            return { valid: false, error: `eventCards[${i}].image contains a disallowed or unsafe protocol.` };
+          }
+          if (/\.svg($|\?)/i.test(trimmedImg) || /^data:image\/svg\+xml/i.test(trimmedImg)) {
+            return { valid: false, error: `eventCards[${i}].image cannot be an SVG. Only JPEG, PNG, or WebP images are permitted.` };
+          }
+        }
+        if (card.badge !== undefined) {
+          if (typeof card.badge !== "string" || card.badge.length > 100) {
+            return { valid: false, error: `eventCards[${i}].badge must be a string up to 100 characters.` };
+          }
+        }
+        if (card.alt !== undefined) {
+          if (typeof card.alt !== "string" || card.alt.length > 200) {
+            return { valid: false, error: `eventCards[${i}].alt must be a string up to 200 characters.` };
+          }
+        }
+      }
+    }
+  }
+
+  return { valid: true };
+}
+
+/**
  * Factory for public content retrieval router (GET /api/content/:pageKey).
  * @param {object} options
  * @param {object} [options.prismaClient] - Prisma client instance
@@ -239,10 +307,11 @@ export function createAdminContentRouter({
 
       const { content, expectedUpdatedAt } = req.body;
 
-      if (content === undefined || content === null || typeof content !== "object") {
+      const validation = validateContentPayload(pageKey, content);
+      if (!validation.valid) {
         return res.status(400).json({
           success: false,
-          message: "Request body must include a valid 'content' object or array.",
+          message: validation.error,
         });
       }
 

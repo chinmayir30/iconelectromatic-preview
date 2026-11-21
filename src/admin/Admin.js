@@ -458,9 +458,11 @@ export function escapeHtml(str) {
 }
 
 // ─── Universal Image Upload Widget ───────────────────────────────────────────
-export function renderImageUploadField(fieldName, label, currentValue, ctxText = '') {
+export function renderImageUploadField(fieldName, label, currentValue, ctxText = '', options = {}) {
   const resolved = ImageStorage.resolveImageUrl(currentValue);
   const hasImg = Boolean(currentValue);
+  const acceptAttr = options.accept || 'image/*';
+  const allowedTypesAttr = options.allowedTypes ? `data-allowed-types="${options.allowedTypes}"` : '';
 
   return `
     <div class="a-field span2 a-image-widget" data-field="${fieldName}">
@@ -476,7 +478,7 @@ export function renderImageUploadField(fieldName, label, currentValue, ctxText =
           <div class="a-img-btn-row">
             <label class="a-btn a-btn-sm a-btn-primary a-upload-btn">
               <i class="fa-solid fa-cloud-arrow-up"></i> <span id="upload-txt-${fieldName}">${hasImg ? 'Replace Image' : 'Upload Image'}</span>
-              <input type="file" accept="image/*" class="a-file-input" data-target="${fieldName}" style="display:none;" />
+              <input type="file" accept="${acceptAttr}" ${allowedTypesAttr} class="a-file-input" data-target="${fieldName}" style="display:none;" />
             </label>
             <button type="button" class="a-btn a-btn-sm a-btn-danger a-img-delete-btn" data-target="${fieldName}" id="del-btn-${fieldName}" style="${hasImg ? '' : 'display:none;'}">
               <i class="fa-solid fa-xmark"></i> Clear image
@@ -497,6 +499,20 @@ function bindImageWidgets(container = document) {
     input.addEventListener('change', async (e) => {
       const file = e.target.files?.[0];
       if (!file) return;
+
+      const allowedTypesAttr = input.getAttribute('data-allowed-types');
+      if (allowedTypesAttr) {
+        const allowed = allowedTypesAttr.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+        const ext = (file.name.split('.').pop() || '').toLowerCase();
+        const mime = (file.type || '').toLowerCase();
+        const matchExt = allowed.includes(ext);
+        const matchMime = allowed.some(a => mime.includes(a));
+        if (!matchExt && !matchMime) {
+          showToast(`Invalid file format. Only ${allowed.join(', ').toUpperCase()} images are permitted.`, 'error');
+          input.value = '';
+          return;
+        }
+      }
 
       const fieldName = input.getAttribute('data-target') || 'image';
       const uploadTxt = container.querySelector(`#upload-txt-${fieldName}`);
@@ -555,6 +571,21 @@ function bindImageWidgets(container = document) {
     input.addEventListener('input', (e) => {
       const fieldName = input.getAttribute('data-target');
       const val = input.value.trim();
+
+      const widget = input.closest('.a-image-widget');
+      const fileInput = widget?.querySelector('.a-file-input');
+      const allowedTypesAttr = fileInput?.getAttribute('data-allowed-types');
+      if (allowedTypesAttr && val) {
+        if (/\.svg($|\?)/i.test(val) || /^data:image\/svg\+xml/i.test(val)) {
+          showToast('SVG images are not permitted for this section. Please use JPEG, PNG, or WebP.', 'error');
+          const hiddenInput = container.querySelector(`#hidden-${fieldName}`) || container.querySelector(`input[name="${fieldName}"]`);
+          if (hiddenInput) hiddenInput.value = '';
+          input.value = '';
+          const thumbBox = container.querySelector(`#thumb-box-${fieldName}`) || container.querySelector(`.a-image-widget[data-field="${fieldName}"] .a-img-thumb-box`);
+          if (thumbBox) thumbBox.innerHTML = `<div class="a-thumb-empty"><i class="fa-solid fa-image"></i><span>No image</span></div>`;
+          return;
+        }
+      }
 
       const hiddenInput = container.querySelector(`#hidden-${fieldName}`) || container.querySelector(`input[name="${fieldName}"]`);
       if (hiddenInput) hiddenInput.value = val;
@@ -1023,9 +1054,9 @@ function renderHomePageEditor() {
             <div class="a-field span2"><label class="a-label">Lead</label><textarea class="a-textarea" name="insightsLead">${d.insightsLead || ''}</textarea></div>
 
             <div class="a-section-divider span2">Events &amp; Exhibitions Section (MAPCON 2027)</div>
-            <div class="a-field"><label class="a-label">Section Tag / Eyebrow</label><input class="a-input" name="eventsTitle" value="${d.eventsTitle || 'Events'}"></div>
-            <div class="a-field"><label class="a-label">Event Heading / Subtitle</label><input class="a-input" name="eventsSubtitle" value="${d.eventsSubtitle || 'MAPCON 2027'}"></div>
-            <div class="a-field span2"><label class="a-label">Event Description</label><textarea class="a-textarea" name="eventsLead">${d.eventsLead || 'ICON ELECTROMATIC is participating at MAPCON 2027, India’s premier IEEE conference on microwave, antennas, and propagation. Connect with our engineering team to explore advanced RF, microwave, and space-grade components.'}</textarea></div>
+            <div class="a-field"><label class="a-label">Section Tag / Eyebrow</label><input class="a-input" name="eventsTitle" value="${escapeHtml(d.eventsTitle || 'Events')}"></div>
+            <div class="a-field"><label class="a-label">Event Heading / Subtitle</label><input class="a-input" name="eventsSubtitle" value="${escapeHtml(d.eventsSubtitle || 'MAPCON 2027')}"></div>
+            <div class="a-field span2"><label class="a-label">Event Description</label><textarea class="a-textarea" name="eventsLead">${escapeHtml(d.eventsLead || 'ICON ELECTROMATIC is participating at MAPCON 2027, India’s premier IEEE conference on microwave, antennas, and propagation. Connect with our engineering team to explore advanced RF, microwave, and space-grade components.')}</textarea></div>
           </div>
         </div>
 
@@ -1107,7 +1138,7 @@ function renderHomePageEditor() {
       </div>
     ` : ''}
 
-    ${currentSubTab === 'events' ? renderCardsManagerTab('Event Photo Cards', eventCards, 'eventcard', ['image', 'badge']) : ''}
+    ${currentSubTab === 'events' ? renderCardsManagerTab('Event Photo Cards', eventCards, 'eventcard', ['image', 'badge', 'alt']) : ''}
   `;
 }
 
@@ -1258,11 +1289,13 @@ function bindHomeTabEvents() {
 
   // Events Cards management
   bindUniversalCardActions('home', d, 'eventCards', 'eventcard', () => `
-    ${renderImageUploadField('image', 'Event Photo', '/images/defense-satcom.jpg', 'Upload or enter photo URL')}
+    ${renderImageUploadField('image', 'Event Photo', '/images/defense-satcom.jpg', 'Upload (JPEG, PNG, WebP) or enter photo URL', { accept: 'image/jpeg,image/png,image/webp', allowedTypes: 'jpeg,jpg,png,webp' })}
     <div class="a-field" style="margin-top:12px;"><label class="a-label">Badge Tag (e.g. Exhibition Showcase)</label><input class="a-input" name="badge" required /></div>
+    <div class="a-field" style="margin-top:12px;"><label class="a-label">Image Alt Text (Accessibility)</label><input class="a-input" name="alt" placeholder="e.g. MAPCON 2027 Exhibition Showcase" /></div>
   `, (card) => `
-    ${renderImageUploadField('image', 'Event Photo', card.image || '', 'Upload or enter photo URL')}
-    <div class="a-field" style="margin-top:12px;"><label class="a-label">Badge Tag</label><input class="a-input" name="badge" value="${card.badge || ''}" required /></div>
+    ${renderImageUploadField('image', 'Event Photo', card.image || '', 'Upload (JPEG, PNG, WebP) or enter photo URL', { accept: 'image/jpeg,image/png,image/webp', allowedTypes: 'jpeg,jpg,png,webp' })}
+    <div class="a-field" style="margin-top:12px;"><label class="a-label">Badge Tag</label><input class="a-input" name="badge" value="${escapeHtml(card?.badge || '')}" required /></div>
+    <div class="a-field" style="margin-top:12px;"><label class="a-label">Image Alt Text (Accessibility)</label><input class="a-input" name="alt" value="${escapeHtml(card?.alt || '')}" placeholder="e.g. MAPCON 2027 Exhibition Showcase" /></div>
   `);
 }
 
@@ -5852,7 +5885,7 @@ function renderCardsManagerTab(title, cardsArray, cardType, fieldsList) {
             ${cardsArray.map((card, idx) => {
               const img = fieldsList.includes('image') ? ImageStorage.resolveImageUrl(card.image) : '';
               const titleVal = card.title || card.badge || card.text || card.year || card.number || ('Item #' + (idx + 1));
-              const subVal = card.desc || card.domain || card.subtitle || card.label || card.tag || card.company || '';
+              const subVal = card.desc || card.domain || card.subtitle || card.label || card.tag || card.company || (card.alt ? `Alt: ${card.alt}` : '');
               return `
                 <tr>
                   <td style="width:90px;">
@@ -5864,8 +5897,8 @@ function renderCardsManagerTab(title, cardsArray, cardType, fieldsList) {
                   ${fieldsList.includes('image') ? `
                     <td>${img ? `<img src="${img}" class="a-img-preview" alt="Thumb" />` : '<span style="color:#94a3b8; font-size:0.75rem;">No image</span>'}</td>
                   ` : ''}
-                  <td><strong>${titleVal}</strong></td>
-                  <td style="font-size:0.82rem; color:var(--a-muted); max-width:300px;">${subVal}</td>
+                  <td><strong>${escapeHtml(titleVal)}</strong></td>
+                  <td style="font-size:0.82rem; color:var(--a-muted); max-width:300px;">${escapeHtml(subVal)}</td>
                   <td>
                     <button class="a-btn a-btn-outline a-btn-sm btn-edit-${cardType}" data-idx="${idx}"><i class="fa-solid fa-pen"></i> Edit</button>
                     <button class="a-btn a-btn-danger a-btn-sm btn-del-${cardType}" data-idx="${idx}" style="margin-left:6px;"><i class="fa-solid fa-trash"></i></button>
@@ -5881,24 +5914,39 @@ function renderCardsManagerTab(title, cardsArray, cardType, fieldsList) {
 }
 
 function bindUniversalCardActions(pageKey, parentData, arrayPropName, cardType, renderAddForm, renderEditForm) {
-  const cards = parentData[arrayPropName] || [];
-
   document.getElementById(`a-add-${cardType}-btn`)?.addEventListener('click', () => {
     openModal('Add New Card', renderAddForm(), async (data) => {
-      cards.push({ id: `${cardType}-${Date.now()}`, ...data });
-      parentData[arrayPropName] = cards;
-      await ContentService.saveData(pageKey, parentData);
+      const currentList = parentData[arrayPropName] || [];
+      const updated = [...currentList, { id: `${cardType}-${Date.now()}`, ...data }];
+      const previous = parentData[arrayPropName];
+      parentData[arrayPropName] = updated;
+      try {
+        await ContentService.saveData(pageKey, parentData);
+      } catch (err) {
+        parentData[arrayPropName] = previous;
+        throw err;
+      }
     });
   });
 
   document.querySelectorAll(`.btn-edit-${cardType}`).forEach(btn => {
     btn.addEventListener('click', () => {
       const idx = parseInt(btn.getAttribute('data-idx'), 10);
-      const card = cards[idx];
+      const currentList = parentData[arrayPropName] || [];
+      const card = currentList[idx];
+      if (!card) return;
       openModal('Edit Card', renderEditForm(card), async (data) => {
-        cards[idx] = { ...card, ...data };
-        parentData[arrayPropName] = cards;
-        await ContentService.saveData(pageKey, parentData);
+        const currentItems = parentData[arrayPropName] || [];
+        const updated = [...currentItems];
+        const previous = parentData[arrayPropName];
+        updated[idx] = { ...card, ...data };
+        parentData[arrayPropName] = updated;
+        try {
+          await ContentService.saveData(pageKey, parentData);
+        } catch (err) {
+          parentData[arrayPropName] = previous;
+          throw err;
+        }
       });
     });
   });
@@ -5908,13 +5956,17 @@ function bindUniversalCardActions(pageKey, parentData, arrayPropName, cardType, 
       const idx = parseInt(btn.getAttribute('data-idx'), 10);
       if (!confirm('Delete this card?')) return;
       btn.disabled = true;
+      const currentList = parentData[arrayPropName] || [];
+      const previous = [...currentList];
+      const updated = [...currentList];
+      updated.splice(idx, 1);
+      parentData[arrayPropName] = updated;
       try {
-        cards.splice(idx, 1);
-        parentData[arrayPropName] = cards;
         await ContentService.saveData(pageKey, parentData);
         rerender();
         showToast('Card deleted.', 'info');
       } catch (err) {
+        parentData[arrayPropName] = previous;
         showToast(err.isConflict ? 'Conflict: modified elsewhere. Please refresh.' : 'Failed to delete card: ' + err.message, 'error');
       } finally {
         btn.disabled = false;
@@ -5928,12 +5980,15 @@ function bindUniversalCardActions(pageKey, parentData, arrayPropName, cardType, 
       const dir = btn.getAttribute('data-dir');
       const targetIdx = dir === 'up' ? idx - 1 : idx + 1;
       btn.disabled = true;
+      const currentList = parentData[arrayPropName] || [];
+      const previous = [...currentList];
       try {
-        parentData[arrayPropName] = reorderArray(cards, idx, targetIdx);
+        parentData[arrayPropName] = reorderArray(currentList, idx, targetIdx);
         await ContentService.saveData(pageKey, parentData);
         rerender();
         showToast('Card order updated!', 'success');
       } catch (err) {
+        parentData[arrayPropName] = previous;
         showToast(err.isConflict ? 'Conflict: modified elsewhere. Please refresh.' : 'Failed to move card: ' + err.message, 'error');
       } finally {
         btn.disabled = false;

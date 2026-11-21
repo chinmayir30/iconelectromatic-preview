@@ -578,3 +578,93 @@ test("Admin PUT rejects conflicting concurrent updates with HTTP 409", async () 
     await new Promise((resolve) => server.close(resolve));
   }
 });
+
+test("Admin PUT /api/admin/content/home validates event cards and blocks SVG / unsafe image protocols", async () => {
+  const prismaMock = createMockPrismaClient();
+  const server = createTestServer({ prismaClient: prismaMock, isAuthenticated: true });
+
+  await new Promise((resolve) => server.listen(0, resolve));
+  try {
+    // 1. Rejects SVG image
+    const svgRes = await request(server, {
+      method: "PUT",
+      path: "/api/admin/content/home",
+      body: {
+        content: {
+          eventsTitle: "Events",
+          eventsSubtitle: "MAPCON 2027",
+          eventCards: [
+            { id: "evt-1", badge: "Showcase", image: "/images/event.svg" },
+          ],
+        },
+      },
+    });
+    assert.equal(svgRes.status, 400);
+    assert.match(svgRes.body.message, /cannot be an SVG/i);
+
+    // 2. Rejects unsafe javascript: URI
+    const jsRes = await request(server, {
+      method: "PUT",
+      path: "/api/admin/content/home",
+      body: {
+        content: {
+          eventCards: [
+            { id: "evt-1", badge: "Showcase", image: "javascript:alert(1)" },
+          ],
+        },
+      },
+    });
+    assert.equal(jsRes.status, 400);
+    assert.match(jsRes.body.message, /disallowed or unsafe protocol/i);
+
+    // 3. Rejects invalid eventCards type (not array)
+    const notArrayRes = await request(server, {
+      method: "PUT",
+      path: "/api/admin/content/home",
+      body: {
+        content: {
+          eventCards: "not-an-array",
+        },
+      },
+    });
+    assert.equal(notArrayRes.status, 400);
+    assert.match(notArrayRes.body.message, /must be an array/i);
+
+    // 4. Accepts valid JPEG, PNG, and WebP event cards
+    const validRes = await request(server, {
+      method: "PUT",
+      path: "/api/admin/content/home",
+      body: {
+        content: {
+          eventsTitle: "Upcoming Conferences",
+          eventsSubtitle: "MAPCON 2027 Exhibition",
+          eventsLead: "Connect with our engineering team.",
+          eventCards: [
+            { id: "evt-1", badge: "Live Demo", image: "/api/media/file/card1.webp", alt: "Live Demo Booth" },
+            { id: "evt-2", badge: "Partner Showcase", image: "https://r2.iconelectromatic.com/card2.jpg", alt: "Partner Showcase" },
+          ],
+        },
+      },
+    });
+    assert.equal(validRes.status, 200);
+    assert.equal(validRes.body.success, true);
+    assert.equal(validRes.body.content.eventCards.length, 2);
+
+    // 5. Allows intentionally empty eventCards array (when admin deletes all events)
+    const emptyRes = await request(server, {
+      method: "PUT",
+      path: "/api/admin/content/home",
+      body: {
+        content: {
+          eventsTitle: "Events",
+          eventCards: [],
+        },
+      },
+    });
+    assert.equal(emptyRes.status, 200);
+    assert.equal(emptyRes.body.success, true);
+    assert.deepEqual(emptyRes.body.content.eventCards, []);
+  } finally {
+    await new Promise((resolve) => server.close(resolve));
+  }
+});

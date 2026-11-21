@@ -37,28 +37,54 @@ function filterPopularProducts(products, filter) {
   return products;
 }
 
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/[&<>'"]/g, (tag) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    "'": '&#39;',
+    '"': '&quot;',
+  }[tag] || tag));
+}
+
+function sanitizeImageUrl(url) {
+  if (!url || typeof url !== 'string') return '/images/defense-satcom.jpg';
+  const trimmed = url.trim();
+  if (/^(?:javascript|vbscript):/i.test(trimmed) || /^data:(?!image\/)/i.test(trimmed)) {
+    return '/images/defense-satcom.jpg';
+  }
+  return trimmed;
+}
+
+const DEFAULT_EVENT_CARDS = [
+  {
+    id: 'evt-1',
+    image: '/images/defense-satcom.jpg',
+    badge: 'Exhibition Showcase',
+    alt: 'MAPCON 2027 Exhibition Showcase',
+  },
+  {
+    id: 'evt-2',
+    image: '/images/timeline/pillar-global-partnerships.jpg',
+    badge: 'Partner Delegation',
+    alt: 'MAPCON 2027 Partner Delegation',
+  },
+  {
+    id: 'evt-3',
+    image: '/images/timeline/domain-aerospace-defence.jpg',
+    badge: 'Engineering Hub',
+    alt: 'MAPCON 2027 Engineering Hub',
+  },
+];
+
 export function renderHomePage() {
   const popular = currentPopularProducts;
   const data = ContentService.getData('home');
   const contact = ContentService.getData('contact');
   const blogs = ContentService.getData('blogs');
-  const eventCards = data.eventCards || [
-    {
-      id: 'evt-1',
-      image: '/images/defense-satcom.jpg',
-      badge: 'Exhibition Showcase',
-    },
-    {
-      id: 'evt-2',
-      image: '/images/timeline/pillar-global-partnerships.jpg',
-      badge: 'Partner Delegation',
-    },
-    {
-      id: 'evt-3',
-      image: '/images/timeline/domain-aerospace-defence.jpg',
-      badge: 'Engineering Hub',
-    },
-  ];
+  const hasConfiguredEventCards = Array.isArray(data.eventCards);
+  const eventCards = hasConfiguredEventCards ? data.eventCards : DEFAULT_EVENT_CARDS;
 
   const rawStats = data.stats || [
     { value: '160+', label: 'VERIFIED COMPONENTS' },
@@ -269,25 +295,33 @@ export function renderHomePage() {
     <section class="events-dark-section">
       <div class="container">
         <div class="section-head-minimal" style="margin-bottom:var(--space-10);">
-          <h2 class="section-tag-mono red-section-title" style="font-size: 2.75rem; font-weight: 800; letter-spacing: 0.05em; margin: 0; line-height: 1.2;">${data.eventsTitle || 'Events'}</h2>
-          <h3 class="section-h2" style="font-size: 2rem; font-weight: 600; line-height: 1.3; margin-top: 8px; margin-bottom: 16px;">${data.eventsSubtitle || 'MAPCON 2027'}</h3>
+          <h2 class="section-tag-mono red-section-title" style="font-size: 2.75rem; font-weight: 800; letter-spacing: 0.05em; margin: 0; line-height: 1.2;">${escapeHtml(data.eventsTitle || 'Events')}</h2>
+          <h3 class="section-h2" style="font-size: 2rem; font-weight: 600; line-height: 1.3; margin-top: 8px; margin-bottom: 16px;">${escapeHtml(data.eventsSubtitle || 'MAPCON 2027')}</h3>
           <p class="section-lead" style="font-size: 1.25rem; max-width: 800px; margin: 0;">
-            ${data.eventsLead || 'ICON ELECTROMATIC is participating at MAPCON 2027, India’s premier IEEE conference on microwave, antennas, and propagation. Connect with our engineering team to explore advanced RF, microwave, and space-grade components.'}
+            ${escapeHtml(data.eventsLead || 'ICON ELECTROMATIC is participating at MAPCON 2027, India’s premier IEEE conference on microwave, antennas, and propagation. Connect with our engineering team to explore advanced RF, microwave, and space-grade components.')}
           </p>
         </div>
 
         <div class="events-grid-dark">
-          ${eventCards.map(evt => {
-            const img = ContentService.resolveImg(evt.image || '/images/defense-satcom.jpg');
+          ${eventCards.length > 0 ? eventCards.map(evt => {
+            const safeImg = sanitizeImageUrl(evt.image || '/images/defense-satcom.jpg');
+            const img = ContentService.resolveImg(safeImg);
+            const altText = escapeHtml(evt.alt || data.eventsSubtitle || 'MAPCON 2027');
+            const badgeText = escapeHtml(evt.badge || 'Event Showcase');
             return `
               <div class="event-card-relay">
                 <div class="event-card-img-wrap">
-                  <img src="${img}" alt="MAPCON 2027" loading="lazy" />
-                  <span class="event-badge-tag">${evt.badge || 'Event Showcase'}</span>
+                  <img src="${img}" alt="${altText}" loading="lazy" />
+                  <span class="event-badge-tag">${badgeText}</span>
                 </div>
               </div>
             `;
-          }).join('')}
+          }).join('') : `
+            <div class="events-empty-state" style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; color: #94a3b8; border: 1px dashed rgba(255,255,255,0.15); border-radius: 8px;">
+              <i class="fa-solid fa-calendar-xmark" style="font-size: 2rem; margin-bottom: 12px; display: block; color: #64748b;"></i>
+              <p style="margin: 0; font-size: 1rem;">No event photo cards currently scheduled. Check back soon for upcoming exhibition updates.</p>
+            </div>
+          `}
         </div>
       </div>
     </section>
