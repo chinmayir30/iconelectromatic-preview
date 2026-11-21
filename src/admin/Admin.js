@@ -1600,7 +1600,6 @@ function bindServicesTabEvents() {
       const slides = [];
       if (data.slide1) slides.push({ image: data.slide1, caption: data.caption1 || '' });
       if (data.slide2) slides.push({ image: data.slide2, caption: data.caption2 || '' });
-      if (!slides.length) slides.push({ image: '/images/hero-amplifier.jpg', caption: data.title });
 
       const tags = (data.tags || '').split(',').map(t => t.trim()).filter(Boolean);
       items.push({
@@ -1644,10 +1643,6 @@ function bindServicesTabEvents() {
         const slides = [];
         if (data.slide1) slides.push({ image: data.slide1, caption: data.caption1 || '' });
         if (data.slide2) slides.push({ image: data.slide2, caption: data.caption2 || '' });
-        // Preserve any remaining slides
-        if (srv.slides && srv.slides.length > 2) {
-          slides.push(...srv.slides.slice(2));
-        }
 
         const tags = (data.tags || '').split(',').map(t => t.trim()).filter(Boolean);
         d.items[idx] = {
@@ -1659,7 +1654,7 @@ function bindServicesTabEvents() {
           desc: data.desc,
           desc2: data.desc2,
           tags,
-          slides: slides.length ? slides : srv.slides
+          slides,
         };
         await ContentService.saveData('services', d);
       });

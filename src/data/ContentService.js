@@ -335,8 +335,6 @@ const INITIAL_CONTENT = {
         slides: [
           { image: '/images/hero-amplifier.jpg', caption: 'RF Component Representation — Microwave Amplifier' },
           { image: '/images/gan-power-chip.jpg', caption: 'Active Antenna GaN MMIC Semiconductor' },
-          { image: '/images/rf-attenuator.jpg', caption: 'Precision RF Attenuator Module' },
-          { image: '/images/rf-mixer.jpg', caption: 'Microwave Frequency Mixer Subsystem' },
         ],
       },
       {
@@ -353,8 +351,6 @@ const INITIAL_CONTENT = {
         slides: [
           { image: '/images/defense-satcom.jpg', caption: 'Product Supply and Logistics — Aerospace & Defense SATCOM' },
           { image: '/images/rf-waveguide.jpg', caption: 'Waveguide Assemblies & Hardware Logistics' },
-          { image: '/images/rf-microwave-pcb.jpg', caption: 'High-Frequency Space-Grade PCB Supply' },
-          { image: '/images/dielectric-3d-lens.jpg', caption: 'Specialized Dielectric Component Logistics' },
         ],
       },
       {
@@ -370,8 +366,6 @@ const INITIAL_CONTENT = {
         slides: [
           { image: '/images/rf-filter.webp', caption: 'RF Design Services — Tunable Cavity Filter' },
           { image: '/images/rf-laminate.jpg', caption: 'High-Frequency Substrate Simulation & Stack-Up' },
-          { image: '/images/rf-filter.jpg', caption: 'Custom Microwave Filter Design & Testing' },
-          { image: '/images/rf-switch.jpg', caption: 'Solid-State RF Switch Prototype' },
         ],
       },
       {
@@ -387,8 +381,6 @@ const INITIAL_CONTENT = {
         slides: [
           { image: '/images/rf-switch.jpg', caption: 'Strategic Partnership Consultancy & Hi-Rel Technology' },
           { image: '/images/rf-microwave-pcb.jpg', caption: 'Make in India Manufacturing Support & Local FAB' },
-          { image: '/images/defense-satcom.jpg', caption: 'Aerospace Program Consultancy' },
-          { image: '/images/gan-power-chip.jpg', caption: 'Semiconductor Industry Modernization & BPO' },
         ],
       },
     ],
