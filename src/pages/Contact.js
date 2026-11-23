@@ -77,13 +77,13 @@ export function renderContactPage() {
           <div class="page-header-unified" style="margin-bottom:0;">
             <h1 class="page-title-unified" id="contact-page-title">
               ${isRecruiting
-                ? (careers.careersTitle || c.careersTitle || 'Join India’s Foremost RF &amp; Microwave Engineering Hub')
-                : (c.heroTitle || 'Send Us a Message &amp; Request Fast Quotes')}
+      ? (careers.careersTitle || c.careersTitle || 'Join India’s Foremost RF &amp; Microwave Engineering Hub')
+      : (c.heroTitle || 'Send Us a Message &amp; Request Fast Quotes')}
             </h1>
             <p class="page-lead-unified" id="contact-page-lead">
               ${isRecruiting
-                ? (careers.careersLead || c.careersLead || 'Accelerate your career in millimeter-wave technology, defense electronics, and satellite communications. Explore engineering opportunities at ICON Electromatic.')
-                : (c.heroLead || 'Whether you require component data sheets, custom waveguide machining, or volume pricing, our application engineering team in Bengaluru is ready to assist.')}
+      ? (careers.careersLead || c.careersLead || 'Accelerate your career in millimeter-wave technology, defense electronics, and satellite communications. Explore engineering opportunities at ICON Electromatic.')
+      : (c.heroLead || 'Whether you require component data sheets, custom waveguide machining, or volume pricing, our application engineering team in Bengaluru is ready to assist.')}
             </p>
           </div>
         </div>
@@ -140,7 +140,7 @@ export function renderContactPage() {
                     <div class="contact-meta-text">
                       <h5>${c.indiaOfficeName || 'Icon Electromatic Pvt. Ltd (India)'}</h5>
                       <p style="margin-bottom:4px;">${(c.indiaAddress || '#303/2, 5th ‘A’ Cross, HRBR Layout, III Block,\nKalyan Nagar, Bengaluru – 560043').replace(/\n/g, '<br/>')}</p>
-                      <p style="font-size:0.84rem;margin-bottom:2px;"><i class="fa-solid fa-phone" style="color:var(--logo-red);width:14px;margin-right:4px;"></i> Tel: <a href="tel:${(c.indiaPhone || '+918025429452').replace(/\s/g,'')}">${c.indiaPhone || '+91 80 2542 9452'}</a></p>
+                      <p style="font-size:0.84rem;margin-bottom:2px;"><i class="fa-solid fa-phone" style="color:var(--logo-red);width:14px;margin-right:4px;"></i> Tel: <a href="tel:${(c.indiaPhone || '+918025429452').replace(/\s/g, '')}">${c.indiaPhone || '+91 80 2542 9452'}</a></p>
                       <p style="font-size:0.84rem;"><i class="fa-solid fa-envelope" style="color:var(--logo-red);width:14px;margin-right:4px;"></i> Email: <a href="mailto:${c.indiaEmail || 'salesiepl@iconelectromatic.com'}" style="color:var(--logo-red-light);">${c.indiaEmail || 'salesiepl@iconelectromatic.com'}</a></p>
                     </div>
                   </div>
@@ -161,7 +161,7 @@ export function renderContactPage() {
                     <div class="contact-meta-text">
                       <h5>${c.usaOfficeName || 'Icon Electromatic LLC (USA)'}</h5>
                       <p style="margin-bottom:4px;">${(c.usaAddress || '15412 Meadow Vista Dr, Edmond,\nOklahoma 73013, USA').replace(/\n/g, '<br/>')}</p>
-                      <p style="font-size:0.84rem;margin-bottom:2px;"><i class="fa-solid fa-phone" style="color:var(--logo-red);width:14px;margin-right:4px;"></i> Tel: <a href="tel:${(c.usaPhone || '+14055935176').replace(/\s/g,'')}">${c.usaPhone || '+1 405 593 5176'}</a></p>
+                      <p style="font-size:0.84rem;margin-bottom:2px;"><i class="fa-solid fa-phone" style="color:var(--logo-red);width:14px;margin-right:4px;"></i> Tel: <a href="tel:${(c.usaPhone || '+14055935176').replace(/\s/g, '')}">${c.usaPhone || '+1 405 593 5176'}</a></p>
                       <p style="font-size:0.84rem;"><i class="fa-solid fa-envelope" style="color:var(--logo-red);width:14px;margin-right:4px;"></i> Email: <a href="mailto:${c.usaEmail || 'salesiellc@iconelectromatic.com'}" style="color:var(--logo-red-light);">${c.usaEmail || 'salesiellc@iconelectromatic.com'}</a></p>
                     </div>
                   </div>
@@ -186,21 +186,21 @@ export function renderContactPage() {
                 <p style="font-size:0.85rem;color:var(--text-gray-400);margin-bottom:var(--space-3);">Click any preset to prefill your inquiry message:</p>
                 <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
                   ${(c.presets || [
-                    'Inquiring about High Frequency Laminates & Prepregs.',
-                    'Inquiring about Embedded Resistive Film.',
-                    'Inquiring about 3D Printed Dielectric Parts.',
-                    'Inquiring about High Power GaN Device and Beamforming IC.',
-                    'Inquiring about High Power Switches and Limiter.',
-                    'Inquiring about RF and MW Components.',
-                    'Inquiring about Tunable Filters.',
-                    'Inquiring about Software Defined Radios.',
-                    'Inquiring about high voltage power supplies.',
-                    'Inquiring about Temperature Sensors.',
-                    'Inquiring about Thin Film Capacitors.',
-                    'Inquiring about Ceramic Capacitors.',
-                    'Inquiring about PCB Fabrication.',
-                    'Inquiring about Perimeter Intrusion Detection System (PIDS).'
-                  ]).map(p => `
+      'Inquiring about High Frequency Laminates & Prepregs.',
+      'Inquiring about Embedded Resistive Film.',
+      'Inquiring about 3D Printed Dielectric Parts.',
+      'Inquiring about High Power GaN Device and Beamforming IC.',
+      'Inquiring about High Power Switches and Limiter.',
+      'Inquiring about RF and MW Components.',
+      'Inquiring about Tunable Filters.',
+      'Inquiring about Software Defined Radios.',
+      'Inquiring about high voltage power supplies.',
+      'Inquiring about Temperature Sensors.',
+      'Inquiring about Thin Film Capacitors.',
+      'Inquiring about Ceramic Capacitors.',
+      'Inquiring about PCB Fabrication.',
+      'Inquiring about Perimeter Intrusion Detection System (PIDS).'
+    ]).map(p => `
                     <button class="filter-chip-dark quick-preset" data-preset="${p}">${p.replace(/^Inquiring about /, '').replace(/\.$/, '')}</button>
                   `).join('')}
                 </div>
@@ -212,12 +212,12 @@ export function renderContactPage() {
             <div id="recruiting-info-column" style="${isRecruiting ? 'display:block;' : 'display:none;'}">
               <div class="contact-relay-card">
                 <div style="display:flex;align-items:center;gap:10px;margin-bottom:var(--space-3);">
-                  <div style="width:38px;height:38px;border-radius:10px;background:rgba(37,99,235,0.15);color:var(--logo-blue-light);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">
+                  <div style="width:38px;height:38px;border-radius:10px;background:rgba(197,31,38,0.15);color:var(--logo-red);display:flex;align-items:center;justify-content:center;font-size:1.1rem;">
                     <i class="${careers.introIcon || 'fa-solid fa-users'}"></i>
                   </div>
                   <div>
                     <h3 style="font-size:1.25rem;font-weight:800;color:var(--text-white);margin:0;">${careers.introTitle || 'Why Build Your Career at ICON?'}</h3>
-                    <span style="font-size:0.75rem;color:var(--logo-blue-light);font-weight:700;">${careers.introSubtitle || 'RF &amp; MICROWAVE EXCELLENCE'}</span>
+                    <span style="font-size:0.75rem;color:var(--logo-red-light);font-weight:700;">${careers.introSubtitle || 'RF &amp; MICROWAVE EXCELLENCE'}</span>
                   </div>
                 </div>
 
@@ -713,7 +713,7 @@ export function initContactPage() {
           if (inquiryPanel) {
             inquiryPanel.innerHTML = `
               <div style="text-align:center;padding:var(--space-10) var(--space-4);">
-                <div style="width:68px;height:68px;border-radius:50%;background:rgba(37,99,235,0.15);color:var(--logo-blue-light);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto var(--space-4);">
+                <div style="width:68px;height:68px;border-radius:50%;background:rgba(197,31,38,0.15);color:var(--logo-red);display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto var(--space-4);">
                   <i class="fa-solid fa-check"></i>
                 </div>
                 <h3 style="font-size:1.5rem;font-weight:800;color:var(--text-white);margin-bottom:8px;">Thank You, ${name}!</h3>

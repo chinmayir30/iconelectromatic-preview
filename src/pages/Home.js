@@ -102,13 +102,6 @@ export function renderHomePage() {
     return st;
   });
 
-  const capList = data.capabilities || [
-    { title: 'RF & Microwave Active', desc: 'High-linearity power amplifiers, ultra-low noise LNAs, active frequency mixers, and voltage-controlled oscillators.', linkText: 'Explore Amplifiers →', linkUrl: '/products?category=amplifiers', icon: 'fa-solid fa-wave-square' },
-    { title: 'Passive & Waveguides', desc: 'High-Q cavity bandpass filters, low-loss waveguide transitions, directional couplers, and coaxial terminations.', linkText: 'Explore Filters →', linkUrl: '/products?category=filters', icon: 'fa-solid fa-filter' },
-    { title: 'Defense & Aerospace', desc: 'Mil-Spec screening, extreme-temperature reliability, and radiation-tolerant solutions for tactical EW and SATCOM.', linkText: 'Learn More →', linkUrl: '/about', icon: 'fa-solid fa-shield-halved' },
-    { title: 'Test & Measurement', desc: 'Precision calibration adapters, armored low-loss RF test cables, and laboratory attenuator modules up to 86 GHz.', linkText: 'Explore Solutions →', linkUrl: '/products?category=test-solutions', icon: 'fa-solid fa-flask-vial' },
-  ];
-
   let blogList = [];
   if (Array.isArray(blogs)) {
     blogList = blogs.slice(0, 3);
@@ -181,30 +174,6 @@ export function renderHomePage() {
       </div>
     </section>
 
-    <!-- CORE CAPABILITIES (Relay Dark Minimal Cards) -->
-    <section class="section-dark">
-      <div class="container">
-        <div class="section-head-minimal">
-          <h2 class="section-tag-mono red-section-title" style="font-size: 2.75rem; font-weight: 800; letter-spacing: 0.05em; margin: 0; line-height: 1.2;">${data.coreCapabilitiesTitle || 'Core Capabilities'}</h2>
-          <h3 class="section-h2" style="font-size: 2rem; font-weight: 600; line-height: 1.3; margin-top: 8px; margin-bottom: 16px;">${data.coreCapabilitiesSubtitle || 'Engineered for extreme performance.'}</h3>
-          <p class="section-lead" style="font-size: 1.25rem; max-width: 800px; margin: 0;">
-            ${data.coreCapabilitiesLead || 'From millimeter-wave defense radar to satellite ground infrastructure, we provide the verified hardware engineers depend on.'}
-          </p>
-        </div>
-
-        <div class="capabilities-grid-dark">
-          ${capList.map(cap => `
-            <div class="capability-card-dark">
-              <div class="capability-icon-box"><i class="${cap.icon || 'fa-solid fa-microchip'}"></i></div>
-              <h3>${cap.title}</h3>
-              <p>${cap.desc}</p>
-              <a data-route="${cap.linkUrl || '/products'}">${cap.linkText || 'Explore →'}</a>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    </section>
-
     <!-- POPULAR PRODUCTS SECTION -->
     <section class="products-dark-section">
       <div class="container">
@@ -261,8 +230,8 @@ export function renderHomePage() {
 
         <div class="insights-grid-dark">
           ${blogList.map(b => {
-            const img = ContentService.resolveImg(b.coverImg || '/images/hero-amplifier.jpg');
-            return `
+    const img = ContentService.resolveImg(b.coverImg || '/images/hero-amplifier.jpg');
+    return `
               <article class="blog-card-relay" data-route="/blogs">
                 <div class="blog-card-relay-img">
                   <img src="${img}" alt="${b.headline || 'Blog'}" loading="lazy" />
@@ -278,7 +247,7 @@ export function renderHomePage() {
                   <p class="blog-card-excerpt">${b.excerpt || b.desc || ''}</p>
                   <div class="blog-card-footer">
                     <div class="blog-author-info">
-                      <div class="blog-author-avatar">${(b.author || 'Dr. VN').split(' ').map(n=>n[0]).join('').substring(0,2)}</div>
+                      <div class="blog-author-avatar">${(b.author || 'Dr. VN').split(' ').map(n => n[0]).join('').substring(0, 2)}</div>
                       <span class="blog-author-name">${b.author || 'Dr. Vikram Nair'}</span>
                     </div>
                     <span class="blog-read-link">Read Article &rarr;</span>
@@ -286,7 +255,7 @@ export function renderHomePage() {
                 </div>
               </article>
             `;
-          }).join('')}
+  }).join('')}
         </div>
       </div>
     </section>
@@ -304,11 +273,11 @@ export function renderHomePage() {
 
         <div class="events-grid-dark">
           ${eventCards.length > 0 ? eventCards.map(evt => {
-            const safeImg = sanitizeImageUrl(evt.image || '/images/defense-satcom.jpg');
-            const img = ContentService.resolveImg(safeImg);
-            const altText = escapeHtml(evt.alt || data.eventsSubtitle || 'MAPCON 2027');
-            const badgeText = escapeHtml(evt.badge || 'Event Showcase');
-            return `
+    const safeImg = sanitizeImageUrl(evt.image || '/images/defense-satcom.jpg');
+    const img = ContentService.resolveImg(safeImg);
+    const altText = escapeHtml(evt.alt || data.eventsSubtitle || 'MAPCON 2027');
+    const badgeText = escapeHtml(evt.badge || 'Event Showcase');
+    return `
               <div class="event-card-relay">
                 <div class="event-card-img-wrap">
                   <img src="${img}" alt="${altText}" loading="lazy" />
@@ -316,7 +285,7 @@ export function renderHomePage() {
                 </div>
               </div>
             `;
-          }).join('') : `
+  }).join('') : `
             <div class="events-empty-state" style="grid-column: 1 / -1; text-align: center; padding: 48px 24px; color: #94a3b8; border: 1px dashed rgba(255,255,255,0.15); border-radius: 8px;">
               <i class="fa-solid fa-calendar-xmark" style="font-size: 2rem; margin-bottom: 12px; display: block; color: #64748b;"></i>
               <p style="margin: 0; font-size: 1rem;">No event photo cards currently scheduled. Check back soon for upcoming exhibition updates.</p>
@@ -358,7 +327,7 @@ export function renderHomePage() {
                   <div class="contact-meta-icon" style="margin-top:2px;"><i class="fa-solid fa-phone"></i></div>
                   <div class="contact-meta-text">
                     <h5>Direct Telephone Reach</h5>
-                    <p><a href="tel:${(contact.indiaPhone || '+918025429452').replace(/\s/g,'')}">${contact.indiaPhone || '+91 80 2542 9452'}</a> (India) · <a href="tel:${(contact.usaPhone || '+14055935176').replace(/\s/g,'')}">${contact.usaPhone || '+1 405 593 5176'}</a> (USA)</p>
+                    <p><a href="tel:${(contact.indiaPhone || '+918025429452').replace(/\s/g, '')}">${contact.indiaPhone || '+91 80 2542 9452'}</a> (India) · <a href="tel:${(contact.usaPhone || '+14055935176').replace(/\s/g, '')}">${contact.usaPhone || '+1 405 593 5176'}</a> (USA)</p>
                   </div>
                 </div>
 
@@ -380,21 +349,21 @@ export function renderHomePage() {
               <p style="font-size:0.85rem;color:var(--text-gray-400);margin-bottom:var(--space-3);">Click any preset to prefill your enquiry message:</p>
               <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
                 ${(contact.presets || [
-                  'Enquiring about High Frequency Laminates & Prepregs.',
-                  'Enquiring about Embedded Resistive Film.',
-                  'Enquiring about 3D Printed Dielectric Parts.',
-                  'Enquiring about High Power GaN Device and Beamforming IC.',
-                  'Enquiring about High Power Switches and Limiter.',
-                  'Enquiring about RF and MW Components.',
-                  'Enquiring about Tunable Filters.',
-                  'Enquiring about Software Defined Radios.',
-                  'Enquiring about high voltage power supplies.',
-                  'Enquiring about Temperature Sensors.',
-                  'Enquiring about Thin Film Capacitors.',
-                  'Enquiring about Ceramic Capacitors.',
-                  'Enquiring about PCB Fabrication.',
-                  'Enquiring about Perimeter Intrusion Detection System (PIDS).'
-                ]).map(p => `
+      'Enquiring about High Frequency Laminates & Prepregs.',
+      'Enquiring about Embedded Resistive Film.',
+      'Enquiring about 3D Printed Dielectric Parts.',
+      'Enquiring about High Power GaN Device and Beamforming IC.',
+      'Enquiring about High Power Switches and Limiter.',
+      'Enquiring about RF and MW Components.',
+      'Enquiring about Tunable Filters.',
+      'Enquiring about Software Defined Radios.',
+      'Enquiring about high voltage power supplies.',
+      'Enquiring about Temperature Sensors.',
+      'Enquiring about Thin Film Capacitors.',
+      'Enquiring about Ceramic Capacitors.',
+      'Enquiring about PCB Fabrication.',
+      'Enquiring about Perimeter Intrusion Detection System (PIDS).'
+    ]).map(p => `
                   <button class="filter-chip-dark quick-preset" data-preset="${p}">${p.replace(/^(?:Inquiring|Enquiring) about /, '').replace(/\.$/, '')}</button>
                 `).join('')}
               </div>
@@ -497,7 +466,7 @@ export function initHomePage() {
     const attemptPlay = () => {
       if (video.paused) {
         video.muted = true;
-        video.play().catch(() => {});
+        video.play().catch(() => { });
       }
     };
     attemptPlay();
@@ -603,15 +572,15 @@ export function initHomePage() {
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
       }
 
-      const rawName = (document.getElementById('h-name')?.value    || '').trim();
+      const rawName = (document.getElementById('h-name')?.value || '').trim();
       const body = {
         fullname: rawName,
-        company:  (document.getElementById('h-company')?.value || '').trim(),
-        email:    (document.getElementById('h-email')?.value   || '').trim(),
-        phone:    (document.getElementById('h-phone')?.value   || '').trim(),
-        subject:  (document.getElementById('h-subject')?.value || 'rfq').trim(),
-        message:  (document.getElementById('h-message')?.value || '').trim(),
-        website:  (form.querySelector('input[name="website"]')?.value || '').trim(),
+        company: (document.getElementById('h-company')?.value || '').trim(),
+        email: (document.getElementById('h-email')?.value || '').trim(),
+        phone: (document.getElementById('h-phone')?.value || '').trim(),
+        subject: (document.getElementById('h-subject')?.value || 'rfq').trim(),
+        message: (document.getElementById('h-message')?.value || '').trim(),
+        website: (form.querySelector('input[name="website"]')?.value || '').trim(),
       };
 
       // Escape the name for safe insertion into innerHTML
@@ -635,7 +604,7 @@ export function initHomePage() {
           if (formWrap) {
             formWrap.innerHTML = `
               <div style="text-align:center;padding:var(--space-8) var(--space-4);">
-                <div style="width:60px;height:60px;border-radius:50%;background:rgba(37,99,235,0.15);color:var(--logo-blue-light);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto var(--space-4);">
+                <div style="width:60px;height:60px;border-radius:50%;background:rgba(197,31,38,0.15);color:var(--logo-red);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto var(--space-4);">
                   <i class="fa-solid fa-check"></i>
                 </div>
                 <h3 style="font-size:1.4rem;font-weight:800;color:var(--text-white);margin-bottom:8px;">Thank You, ${safeName}!</h3>
