@@ -11,47 +11,7 @@ export const OEM_BLOGS = [
     officialWebsite: 'https://www.rogerscorp.com/advanced-electronics-solutions',
     portalName: 'Rogers AES Technology Center',
     headline: 'Advanced High-Frequency PTFE & Ceramic Substrates for Millimeter-Wave Radars',
-    articles: [
-      {
-        id: 'rogers-art-1',
-        title: 'Rogers Unveils Next-Gen RT/duroid® Formulations for 77–81 GHz Automotive Radars',
-        date: 'September 2026',
-        category: 'Materials Innovation',
-        readTime: '5 min read',
-        image: '/images/rf-laminate.jpg',
-        summary: 'New micro-dispersion glass microfiber composites reduce dielectric loss tangent down to 0.0009 at 77 GHz while preserving dimensional stability across -55°C to +125°C automotive qualification cycles.',
-        content: `
-          <p>As commercial automotive radars transition to high-definition 77–81 GHz imaging architectures, dielectric consistency and low insertion loss have become fundamental design constraints. Rogers Corporation has announced enhanced RT/duroid® composite formulations specifically tailored for millimeter-wave antenna-in-package (AiP) and microstrip patch arrays.</p>
-          <h4>Key Engineering Advantages:</h4>
-          <ul>
-            <li><strong>Dielectric Constant Tolerance:</strong> Tight Dk control of 2.20 ± 0.02 across the entire production lot, minimizing beam squint in phased array radar sensors.</li>
-            <li><strong>Extremely Low Dissipation Factor:</strong> Tan δ of 0.0009 at 77 GHz ensures maximum transmit power efficiency and received signal-to-noise ratio (SNR).</li>
-            <li><strong>Reverse-Treated Copper Foil:</strong> Ultralow surface roughness (Rq < 0.3 µm) eliminates conductor loss spikes typical in sub-THz frequency bands.</li>
-          </ul>
-          <p>ICON Electromatic stocks certified RT/duroid panels for defense radar, automotive prototyping, and satellite transceivers with complete lot traceability.</p>
-        `,
-        tags: ['77 GHz Radar', 'RT/duroid', 'PTFE Substrate', 'Automotive']
-      },
-      {
-        id: 'rogers-art-2',
-        title: 'RO4000® Series Evolution: Combining FR-4 Processing Simplicity with Millimeter-Wave Performance',
-        date: 'August 2026',
-        category: 'Manufacturing Guide',
-        readTime: '4 min read',
-        image: '/images/rf-microwave-pcb.jpg',
-        summary: 'A technical review of RO4350B and RO4003C thermoset ceramic laminates enabling standard standard multi-layer PCB lamination without specialized plasma sodium treatment.',
-        content: `
-          <p>Traditional PTFE laminates require specialized sodium etching or plasma surface preparation prior to through-hole plating. Rogers RO4000® series thermoset hydrocarbon ceramic laminates overcome this hurdle, processing like standard FR-4 while delivering microwave electrical performance.</p>
-          <h4>Fabrication & Electrical Highlights:</h4>
-          <ul>
-            <li>Compatible with automated surface-mount assembly and lead-free SAC305 reflow profiles up to 280°C.</li>
-            <li>Low Z-axis coefficient of thermal expansion (CTE 31 ppm/°C) matches copper, preventing plated through-hole (PTH) barrel fatigue under severe thermal shock.</li>
-            <li>Excellent thermal conductivity (0.62 W/m/K) provides efficient passive heat spreading under surface-mount power amplifiers.</li>
-          </ul>
-        `,
-        tags: ['RO4350B', 'PCB Fabrication', 'Thermoset', 'High-Rel']
-      }
-    ],
+    articles: [],
     videos: [
       {
         id: 'rogers-vid-1',
