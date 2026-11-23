@@ -112,7 +112,7 @@ export function renderProductDetailPage(params, catalogProduct = null, apiError 
           <!-- Product Details -->
           <div>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-              <span class="a-badge a-badge-blue" style="font-size:0.78rem;letter-spacing:0.04em;">
+              <span class="a-badge a-badge-red" style="background:rgba(197,31,38,0.15);color:var(--logo-red);border:1px solid rgba(197,31,38,0.3);font-size:0.78rem;letter-spacing:0.04em;">
                 <i class="fa-solid fa-industry" style="margin-right:4px;"></i> ${oemName}
               </span>
               <span class="a-badge" style="background:rgba(255,255,255,0.08);color:#cbd5e1;font-size:0.78rem;">

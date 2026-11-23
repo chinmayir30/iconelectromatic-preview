@@ -1,4 +1,4 @@
-﻿/**
+/**
  * About Page — ICON ELECTROMATIC
  * Strictly containing the authentic content from https://iconelectromatic2.lbimedia.in/about-us/
  * Fully dynamic via ContentService — cards, images, milestones, domains, pillars, why us.
@@ -30,11 +30,11 @@ export function renderAboutPage() {
   }));
 
   const highlightCards = (d.highlightCards || [
-    { title: 'Global Leader in RF & Electronic Solutions', desc: 'Providing mission-critical components, assemblies, and custom microwave engineering for advanced applications.', icon: 'fa-solid fa-tower-broadcast', color: 'blue' },
+    { title: 'Global Leader in RF & Electronic Solutions', desc: 'Providing mission-critical components, assemblies, and custom microwave engineering for advanced applications.', icon: 'fa-solid fa-tower-broadcast', color: 'red' },
     { title: 'Advanced Components, Consultancy & Bespoke Design Services', desc: 'End-to-end design-in engineering, RF simulation review, and custom-tailored fulfillment for client success.', icon: 'fa-solid fa-microchip', color: 'red' },
-    { title: 'Business Consultancy', desc: 'Strategic Partnerships', icon: 'fa-solid fa-handshake', color: 'blue' },
+    { title: 'Business Consultancy', desc: 'Strategic Partnerships', icon: 'fa-solid fa-handshake', color: 'red' },
     { title: 'Product Supply and Logistics', desc: 'Supply Chain & Logistics', icon: 'fa-solid fa-truck-fast', color: 'red' },
-  ]).map(c => ({ ...c, color: c.color || 'red' }));
+  ]).map(c => ({ ...c, color: 'red' }));
 
   const stats = (d.stats || [
     { target: '1500', suffix: '+', label: 'Products', icon: 'fa-solid fa-boxes-stacked', color: 'red' },
@@ -43,10 +43,10 @@ export function renderAboutPage() {
   ]).map(s => ({ ...s, color: 'red' }));
 
   const milestones = d.milestones || [
-    { year: '2009', title: 'RF & Microwave Genesis', desc: 'Established in Bengaluru, Karnataka by veteran RF & Microwave engineers focusing on defense electronics and aerospace components distribution.', image: '/images/timeline/timeline-2009-bengaluru.jpg', caption: 'Genesis in Bengaluru, India', color: 'cyan' },
+    { year: '2009', title: 'RF & Microwave Genesis', desc: 'Established in Bengaluru, Karnataka by veteran RF & Microwave engineers focusing on defense electronics and aerospace components distribution.', image: '/images/timeline/timeline-2009-bengaluru.jpg', caption: 'Genesis in Bengaluru, India', color: 'red' },
     { year: '2018', title: 'Singapore APAC Gateway', desc: 'Incorporated Icon Electromatic Singapore Pte Ltd to anchor international supply chains and streamline East Asian semiconductor distribution.', image: '/images/timeline/timeline-2018-singapore.jpg', caption: 'Regional Headquarters Singapore', color: 'red' },
-    { year: 'May 2020', title: 'USA Transatlantic Corridor', desc: 'Expanded transatlantic footprint to the United States to collaborate directly with premier American microwave OEMs, ITAR suppliers, and global innovators.', image: '/images/timeline/timeline-2020-usa.jpg', caption: 'US Operations, Oklahoma', color: 'navy' },
-    { year: 'Nov 2020', title: 'Incorporation in India', desc: 'Transitioned and formally incorporated as Icon Electromatic Private Limited, scaling nationwide operations and advancing “Make in India” initiatives.', image: '/images/timeline/timeline-2020-india.jpg', caption: 'Incorporation in India', color: 'amber' },
+    { year: 'May 2020', title: 'USA Transatlantic Corridor', desc: 'Expanded transatlantic footprint to the United States to collaborate directly with premier American microwave OEMs, ITAR suppliers, and global innovators.', image: '/images/timeline/timeline-2020-usa.jpg', caption: 'US Operations, Oklahoma', color: 'red' },
+    { year: 'Nov 2020', title: 'Incorporation in India', desc: 'Transitioned and formally incorporated as Icon Electromatic Private Limited, scaling nationwide operations and advancing “Make in India” initiatives.', image: '/images/timeline/timeline-2020-india.jpg', caption: 'Incorporation in India', color: 'red' },
   ];
 
 
@@ -131,8 +131,8 @@ export function renderAboutPage() {
             <!-- Feature Highlight Cards -->
             <div style="display:flex;flex-direction:column;gap:16px;">
               ${highlightCards.map(hl => `
-                <div style="border-radius:16px;padding:24px 20px;display:flex;align-items:flex-start;gap:16px;" class="about-subcard-${hl.color || 'blue'} about-interactive-card ${hl.color === 'red' ? 'red-glow' : ''} about-animate-fadeup">
-                  <div class="about-card-icon" style="width:48px;height:48px;border-radius:12px;background:rgba(${hl.color === 'red' ? '225,29,72' : '37,99,235'},0.15);border:1px solid rgba(${hl.color === 'red' ? '225,29,72' : '37,99,235'},0.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--logo-${hl.color || 'blue'}-light);flex-shrink:0;">
+                <div style="border-radius:16px;padding:24px 20px;display:flex;align-items:flex-start;gap:16px;" class="about-subcard-red about-interactive-card red-glow about-animate-fadeup">
+                  <div class="about-card-icon" style="width:48px;height:48px;border-radius:12px;background:rgba(197,31,38,0.15);border:1px solid rgba(197,31,38,0.3);display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:var(--logo-red-light);flex-shrink:0;">
                     <i class="${hl.icon || 'fa-solid fa-microchip'}"></i>
                   </div>
                   <div>
@@ -384,9 +384,9 @@ export function renderAboutPage() {
 
             <div class="why-us-grid-dark">
               ${whyUs.map(wu => `
-                <div class="why-us-card about-interactive-card ${wu.color === 'red' ? 'red-accent red-glow' : ''} about-animate-fadeup" style="border-top:3px solid var(--logo-${wu.color || 'blue'});">
+                <div class="why-us-card about-interactive-card red-accent red-glow about-animate-fadeup" style="border-top:3px solid var(--logo-red);">
                   <span class="why-card-number">${wu.number || '01'}</span>
-                  <div class="about-card-icon" style="width:48px;height:48px;border-radius:12px;background:rgba(${wu.color === 'red' ? '225,29,72' : '37,99,235'},0.12);border:1px solid rgba(${wu.color === 'red' ? '225,29,72' : '37,99,235'},0.3);color:var(--logo-${wu.color || 'blue'}-light);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:20px;">
+                  <div class="about-card-icon" style="width:48px;height:48px;border-radius:12px;background:rgba(197,31,38,0.15);border:1px solid rgba(197,31,38,0.3);color:var(--logo-red-light);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:20px;">
                     <i class="${wu.icon || 'fa-solid fa-bullseye'}"></i>
                   </div>
                   <h3 style="font-family:var(--font-display);font-size:1.25rem;font-weight:800;margin-bottom:12px;line-height:1.35;">
