@@ -162,7 +162,7 @@ export function getAllProductsFlattened() {
           oemId: oem.id,
           oemName: oem.name,
           oemShort: oem.shortName || oem.name,
-          oemAccent: oem.accentColor || '#2563EB',
+          oemAccent: oem.accentColor || '#CC0000',
           oemDefaultImage: oem.defaultImage || '',
           oemSpecialty: oem.specialty || ''
         });
@@ -560,7 +560,7 @@ function renderSearchResultsGrid(matchingProducts, query) {
         const oem = {
           shortName: product.oemShort || product.oemName,
           name: product.oemName,
-          accentColor: product.oemAccent || '#2563EB',
+          accentColor: product.oemAccent || '#CC0000',
           defaultImage: product.oemDefaultImage || ''
         };
         const cat = {

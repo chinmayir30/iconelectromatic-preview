@@ -355,7 +355,7 @@ export function renderAboutPage() {
                         <img src="${img}" alt="${m.title}" loading="lazy" />
                         ${m.caption ? `
                           <div class="journey-photo-caption">
-                            <i class="${idx === 0 ? 'fa-solid fa-satellite-dish' : idx === 1 ? 'fa-solid fa-earth-asia' : idx === 2 ? 'fa-solid fa-plane-up' : 'fa-solid fa-shield-halved'}" style="margin-right:6px; color:${color === 'red' ? '#FB7185' : color === 'navy' ? '#60A5FA' : color === 'amber' ? '#FBBF24' : '#00E5FF'};"></i>
+                            <i class="${idx === 0 ? 'fa-solid fa-satellite-dish' : idx === 1 ? 'fa-solid fa-earth-asia' : idx === 2 ? 'fa-solid fa-plane-up' : 'fa-solid fa-shield-halved'}" style="margin-right:6px; color:var(--logo-red-light);"></i>
                             <span>${m.caption}</span>
                           </div>
                         ` : ''}

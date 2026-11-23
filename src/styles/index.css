@@ -12,10 +12,10 @@
   --bg-card: rgba(13, 21, 38, 0.7);
   --bg-card-hover: rgba(20, 32, 58, 0.85);
 
-  --logo-blue: #2563EB;
-  --logo-blue-hover: #1D4ED8;
-  --logo-blue-light: #60A5FA;
-  --logo-blue-glow: rgba(37, 99, 235, 0.35);
+  --logo-blue: #C51F26;
+  --logo-blue-hover: #A7171E;
+  --logo-blue-light: #DE3841;
+  --logo-blue-glow: rgba(197, 31, 38, 0.35);
 
   --logo-red: #C51F26;
   --logo-red-hover: #A7171E;
@@ -34,7 +34,7 @@
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-card: rgba(255, 255, 255, 0.12);
   --border-hover: rgba(255, 255, 255, 0.25);
-  --border-blue: rgba(37, 99, 235, 0.4);
+  --border-blue: rgba(197, 31, 38, 0.4);
   --border-red: rgba(197, 31, 38, 0.4);
 
   /* Status */
