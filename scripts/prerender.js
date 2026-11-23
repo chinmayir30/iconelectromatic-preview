@@ -178,14 +178,16 @@ async function prerenderCorePages(templateHtml) {
       }
 
       const appHtml = [
-        `<header class="site-header" id="site-header">${header.renderHeaderInner(page.route)}</header>`,
         body,
         footer.renderFooter(),
         '<button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>',
         chatbot.renderChatbot(),
       ].join('');
       let pageHtml = replaceCorePageMetadata(templateHtml, page);
-      pageHtml = pageHtml.replace('<header class="site-header" id="site-header"></header>', '');
+      pageHtml = pageHtml.replace(
+        '<header class="site-header" id="site-header"></header>',
+        `<header class="site-header" id="site-header">${header.renderHeaderInner(page.route)}</header>`
+      );
       pageHtml = pageHtml.replace('<div id="app"></div>', `<div id="app">${appHtml}</div>`);
 
       const outputPath = page.route === '/'

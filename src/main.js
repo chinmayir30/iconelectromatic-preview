@@ -42,7 +42,10 @@ function renderPage(renderContent, initFn) {
   const currentPath = getCurrentPath();
   let header = document.getElementById('site-header');
 
-  if (!header) {
+  if (!header || header.parentElement === app) {
+    if (header && header.parentElement === app) {
+      header.remove();
+    }
     header = document.createElement('header');
     header.className = 'site-header';
     header.id = 'site-header';
