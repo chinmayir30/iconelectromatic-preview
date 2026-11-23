@@ -894,6 +894,12 @@ export const ContentService = {
     if (local) {
       try {
         const parsed = JSON.parse(local);
+        if (pageKey === 'products' && Array.isArray(parsed)) {
+          parsed.forEach(o => {
+            o.accentColor = '#CC0000';
+            o.glowColor = 'rgba(204, 0, 0, 0.4)';
+          });
+        }
         if (pageKey === 'products') {
           if (Array.isArray(parsed)) {
             const ev = parsed.find(o => o.id === 'evans');
