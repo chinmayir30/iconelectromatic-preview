@@ -916,18 +916,33 @@ export const ContentService = {
             return parsed;
           }
         } else if (pageKey === 'blogs') {
+          const freshOemMap = new Map((OEM_BLOGS || []).map(b => [b.oemId, b]));
           if (parsed && Array.isArray(parsed.oemBlogs)) {
+            parsed.oemBlogs = parsed.oemBlogs.map(b => {
+              const fresh = freshOemMap.get(b.oemId);
+              if (fresh) {
+                return { ...b, articles: fresh.articles || [] };
+              }
+              return b;
+            });
             _memoryCache.set(pageKey, parsed);
             return parsed;
           }
           if (Array.isArray(parsed) && parsed.length > 0 && parsed[0].oemId) {
+            const syncedList = parsed.map(b => {
+              const fresh = freshOemMap.get(b.oemId);
+              if (fresh) {
+                return { ...b, articles: fresh.articles || [] };
+              }
+              return b;
+            });
             const wrapped = {
               heroTitle: 'OEM Technical News & Engineering Bulletins',
               heroSubtitle: 'Direct technical bulletins, engineering updates, and product release announcements from ICON Electromatic\'s global manufacturing partners.',
               trustBadge1: 'Technical Application Notes',
               trustBadge2: 'Manufacturer Engineering Bulletins',
               trustBadge3: 'Direct OEM Insights',
-              oemBlogs: parsed
+              oemBlogs: syncedList
             };
             _memoryCache.set(pageKey, wrapped);
             return wrapped;
