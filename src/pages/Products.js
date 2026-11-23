@@ -18,9 +18,14 @@ function getAllOEMs() {
   const rawOems = catalogData || ContentService.getData('products') || CATALOG || [];
   const freshEv = CATALOG.find(o => o.id === 'evans');
   const oems = rawOems.map(oem => {
+    const unified = {
+      ...oem,
+      accentColor: '#CC0000',
+      glowColor: 'rgba(204, 0, 0, 0.4)'
+    };
     if (oem.id === 'evans' && freshEv) {
       return {
-        ...oem,
+        ...unified,
         name: freshEv.name,
         shortName: freshEv.shortName,
         specialty: freshEv.specialty,
@@ -29,7 +34,7 @@ function getAllOEMs() {
         description: freshEv.description
       };
     }
-    return oem;
+    return unified;
   });
   return oems.filter(o => !EXCLUDED_OEM_IDS.has(o.id));
 }
