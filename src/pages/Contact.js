@@ -86,18 +86,6 @@ export function renderContactPage() {
                 : (c.heroLead || 'Whether you require component data sheets, custom waveguide machining, or volume pricing, our application engineering team in Bengaluru is ready to assist.')}
             </p>
           </div>
-
-          <!-- Highlights Strip (Matching Partners, Services, Blogs 1:1) -->
-          <div class="services-trust-strip contact-trust-strip" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px;margin-bottom:0;padding-bottom:0;border-bottom:none;">
-            <div style="background:rgba(225,29,72,0.08);border:1px solid rgba(225,29,72,0.25);border-radius:8px;padding:7px 14px;font-size:0.82rem;color:#FDA4AF;display:flex;align-items:center;gap:7px;">
-              <i class="fa-solid fa-dolly" style="color:var(--logo-red-light);"></i>
-              <span>Global Sourcing &amp; Logistics</span>
-            </div>
-            <div style="background:rgba(225,29,72,0.08);border:1px solid rgba(225,29,72,0.25);border-radius:8px;padding:7px 14px;font-size:0.82rem;color:#FDA4AF;display:flex;align-items:center;gap:7px;">
-              <i class="fa-solid fa-shield-halved" style="color:var(--logo-red-light);"></i>
-              <span>Defense &amp; Commercial Pricing</span>
-            </div>
-          </div>
         </div>
       </section>
 
