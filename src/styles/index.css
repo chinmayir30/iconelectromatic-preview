@@ -76,6 +76,15 @@
   --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Turnstile Widget Container — hidden until Cloudflare renders the iframe into it */
+.turnstile-widget {
+  min-height: 0;
+  overflow: hidden;
+}
+.turnstile-widget:empty {
+  display: none;
+}
+
 /* Honeypot Security Field (Off-screen / completely hidden from human view) */
 .turnstile-honeypot {
   position: absolute !important;

@@ -504,6 +504,8 @@ export function initContactPage() {
       if (status) status.textContent = 'Complete the security check before submitting.';
       return widget;
     }).catch(() => {
+      // Hide the widget container so it doesn't show as a blank white box
+      if (widgetContainer) widgetContainer.style.display = 'none';
       if (status) {
         status.textContent =
           'Security verification could not load. Refresh the page to try again; your submission has not been sent.';
