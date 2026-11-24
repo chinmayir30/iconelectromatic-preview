@@ -954,7 +954,7 @@ export const ContentService = {
             domain: 'High Frequency, Microwave & mmWave PCB Fabrication',
             category: 'components',
             accentColor: 'red',
-            logoImg: '',
+            logoImg: '/images/partners/oem-transline-technology.png',
             logoSvg: '<svg viewBox="0 0 220 42" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="38" height="38" rx="9" fill="rgba(245,158,11,0.2)" stroke="#F59E0B" stroke-width="1.8"/><path d="M12 21h8l4-9 4 18 4-9h8" stroke="#FBBF24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="48" y="21" fill="#FFFFFF" font-family="\'Plus Jakarta Sans\', sans-serif" font-weight="900" font-size="14.5" letter-spacing="0.5">TRANSLINE</text><text x="48" y="34" fill="#FBBF24" font-family="\'Plus Jakarta Sans\', sans-serif" font-weight="800" font-size="7.5" letter-spacing="1.5">RF/MW PCB TECH</text></svg>',
             description: 'Transline Technology is an elite fabricator of advanced RF, microwave, and millimeter-wave printed circuit boards utilizing Rogers, PTFE, and hybrid dielectric stackups for aerospace and defense electronics.',
             website: 'https://translinetech.com'
@@ -964,13 +964,23 @@ export const ContentService = {
             const defLogoMap = new Map(defPartners.map(p => [p.id, p.logoImg]));
             parsed.partners.forEach(p => {
               const freshLogo = defLogoMap.get(p.id);
-              if (freshLogo && (!p.logoImg || p.logoImg.includes('oem-logos/'))) {
+              if (p.id === 'powerfactor' || p.id === 'transline-technology' || p.id === 'transline') {
+                if (freshLogo) p.logoImg = freshLogo;
+              } else if (freshLogo && (!p.logoImg || p.logoImg.includes('oem-logos/'))) {
                 p.logoImg = freshLogo;
               }
             });
             parsed.partners = parsed.partners.filter(p => p.id !== 'fortify' && p.id !== '3dfortify');
             if (!parsed.partners.some(p => p.id === 'transline-technology' || p.id === 'transline')) {
               parsed.partners.push(translinePartner);
+            }
+            const tp = parsed.partners.find(p => p.id === 'transline-technology' || p.id === 'transline');
+            if (tp) {
+              tp.logoImg = '/images/partners/oem-transline-technology.png';
+            }
+            const pf = parsed.partners.find(p => p.id === 'powerfactor');
+            if (pf) {
+              pf.logoImg = '/images/partners/oem-powerrf.jpg';
             }
             const qp = parsed.partners.find(p => p.id === 'quantic-eulex');
             if (qp) {
@@ -985,6 +995,14 @@ export const ContentService = {
             const list = parsed.filter(p => p.id !== 'fortify' && p.id !== '3dfortify');
             if (!list.some(p => p.id === 'transline-technology' || p.id === 'transline')) {
               list.push(translinePartner);
+            }
+            const tp = list.find(p => p.id === 'transline-technology' || p.id === 'transline');
+            if (tp) {
+              tp.logoImg = '/images/partners/oem-transline-technology.png';
+            }
+            const pf = list.find(p => p.id === 'powerfactor');
+            if (pf) {
+              pf.logoImg = '/images/partners/oem-powerrf.jpg';
             }
             const qp = list.find(p => p.id === 'quantic-eulex');
             if (qp) {
@@ -1147,9 +1165,9 @@ export const ContentService = {
         { id: 'quantic-eulex', name: 'Evans / UTC / Paktron / Eulex', domain: 'Hybrid Wet Tantalum, Multilayer Ceramic (MLCC), Multilayer Polymer (MLP) Film, RF/High Frequency Ceramic', category: 'components', accentColor: 'red', logoImg: '/images/oem-logos/Evans_logo.png', description: 'Deliver power-dense, high-reliability capacitors engineered for mission-critical environments', website: 'https://www.quanticdevices.com' },
         { id: 'quantic-ohmega', name: 'Quantic Ohmega-Ticer', domain: 'Embedded Thin-Film Resistive Materials', category: 'materials', accentColor: 'red', logoImg: '/images/oem-logos/OhmegaTicer_Black.png', description: 'Ohmega-Ticer provides embedded thin-film resistive copper foils that enable compact, high-performance digital and RF PCB designs for defence, aerospace, and advanced electronics.', website: 'https://www.ohmega.com' },
         { id: 'thermosen', name: 'Thermosen Technologies', domain: 'Temperature Sensors for Hi-Rel Applications', category: 'sensors', accentColor: 'red', logoImg: '/images/oem-logos/Thermosen_logo.png', description: 'Thermosen develops temperature sensing solutions focused on Hi-Rel, aerospace, and defence sectors, ensuring accurate thermal monitoring in extreme environments.', website: 'https://www.thermosen.com' },
-        { id: 'powerfactor', name: 'PowerFactor Electronics (PowerRF)', domain: 'Power Electronics & RF Microwave Domains', category: 'components', accentColor: 'red', logoImg: '/PICTURES/PowerRFlogo Vert Logo1.jpg', description: 'Specialized in R&D, design, testing, consultancy, and product development in Power Electronics and RF Microwave domains under the Make in India initiative.', website: 'https://powerrf.in' },
+        { id: 'powerfactor', name: 'PowerFactor Electronics (PowerRF)', domain: 'Power Electronics & RF Microwave Domains', category: 'components', accentColor: 'red', logoImg: '/images/partners/oem-powerrf.jpg', description: 'Specialized in R&D, design, testing, consultancy, and product development in Power Electronics and RF Microwave domains under the Make in India initiative.', website: 'https://powerrf.in' },
         { id: 'nee', name: 'NEE International (New Era Electronics)', domain: 'Application PCBs for Microwave & Satellite Communication', category: 'sensors', accentColor: 'red', logoImg: '/images/oem-logos/NEE_Logo_wb.png', description: 'NEE International is a leading fabricator of microwave and satellite communication PCBs, supporting high-frequency and space-grade electronic applications.', website: 'https://neeinternational.com' },
-        { id: 'transline-technology', name: 'Transline Technology', domain: 'High Frequency, Microwave & mmWave PCB Fabrication', category: 'components', accentColor: 'red', logoImg: '', logoSvg: '<svg viewBox="0 0 220 42" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="38" height="38" rx="9" fill="rgba(245,158,11,0.2)" stroke="#F59E0B" stroke-width="1.8"/><path d="M12 21h8l4-9 4 18 4-9h8" stroke="#FBBF24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="48" y="21" fill="#FFFFFF" font-family="\'Plus Jakarta Sans\', sans-serif" font-weight="900" font-size="14.5" letter-spacing="0.5">TRANSLINE</text><text x="48" y="34" fill="#FBBF24" font-family="\'Plus Jakarta Sans\', sans-serif" font-weight="800" font-size="7.5" letter-spacing="1.5">RF/MW PCB TECH</text></svg>', description: 'Transline Technology is an elite fabricator of advanced RF, microwave, and millimeter-wave printed circuit boards utilizing Rogers, PTFE, and hybrid dielectric stackups for aerospace and defense electronics.', website: 'https://translinetech.com' },
+        { id: 'transline-technology', name: 'Transline Technology', domain: 'High Frequency, Microwave & mmWave PCB Fabrication', category: 'components', accentColor: 'red', logoImg: '/images/partners/oem-transline-technology.png', logoSvg: '<svg viewBox="0 0 220 42" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="38" height="38" rx="9" fill="rgba(245,158,11,0.2)" stroke="#F59E0B" stroke-width="1.8"/><path d="M12 21h8l4-9 4 18 4-9h8" stroke="#FBBF24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><text x="48" y="21" fill="#FFFFFF" font-family="\'Plus Jakarta Sans\', sans-serif" font-weight="900" font-size="14.5" letter-spacing="0.5">TRANSLINE</text><text x="48" y="34" fill="#FBBF24" font-family="\'Plus Jakarta Sans\', sans-serif" font-weight="800" font-size="7.5" letter-spacing="1.5">RF/MW PCB TECH</text></svg>', description: 'Transline Technology is an elite fabricator of advanced RF, microwave, and millimeter-wave printed circuit boards utilizing Rogers, PTFE, and hybrid dielectric stackups for aerospace and defense electronics.', website: 'https://translinetech.com' },
       ];
       const initial = {
         heroTitle: 'Authorized Technology Partners',
