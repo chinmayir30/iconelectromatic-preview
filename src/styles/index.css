@@ -13960,25 +13960,45 @@ img, video, iframe {
 }
 
 .oem-card-logo-container img[src*="Transline"],
+.oem-card-logo-container img[src*="transline"],
 .oem-logo-badge-pod img[src*="Transline"],
+.oem-logo-badge-pod img[src*="transline"],
 .partner-stream-card-logo-box img[src*="Transline"],
+.partner-stream-card-logo-box img[src*="transline"],
 .oem-running-logo-box img[src*="Transline"],
+.oem-running-logo-box img[src*="transline"],
 .catalog-oem-banner-logo-box img[src*="Transline"],
+.catalog-oem-banner-logo-box img[src*="transline"],
 .blogs-selected-logo-wrap img[src*="Transline"],
+.blogs-selected-logo-wrap img[src*="transline"],
 .cpl-inline-logo-img[src*="Transline"],
+.cpl-inline-logo-img[src*="transline"],
 .partner-logo-img[src*="Transline"],
+.partner-logo-img[src*="transline"],
 .oem-logo-img[src*="Transline"],
+.oem-logo-img[src*="transline"],
 .oem-running-logo-img[src*="Transline"],
+.oem-running-logo-img[src*="transline"],
 [data-theme="light"] .oem-card-logo-container img[src*="Transline"],
+[data-theme="light"] .oem-card-logo-container img[src*="transline"],
 [data-theme="light"] .oem-logo-badge-pod img[src*="Transline"],
+[data-theme="light"] .oem-logo-badge-pod img[src*="transline"],
 [data-theme="light"] .partner-stream-card-logo-box img[src*="Transline"],
+[data-theme="light"] .partner-stream-card-logo-box img[src*="transline"],
 [data-theme="light"] .oem-running-logo-box img[src*="Transline"],
+[data-theme="light"] .oem-running-logo-box img[src*="transline"],
 [data-theme="light"] .catalog-oem-banner-logo-box img[src*="Transline"],
+[data-theme="light"] .catalog-oem-banner-logo-box img[src*="transline"],
 [data-theme="light"] .blogs-selected-logo-wrap img[src*="Transline"],
+[data-theme="light"] .blogs-selected-logo-wrap img[src*="transline"],
 [data-theme="light"] .cpl-inline-logo-img[src*="Transline"],
+[data-theme="light"] .cpl-inline-logo-img[src*="transline"],
 [data-theme="light"] .partner-logo-img[src*="Transline"],
+[data-theme="light"] .partner-logo-img[src*="transline"],
 [data-theme="light"] .oem-logo-img[src*="Transline"],
-[data-theme="light"] .oem-running-logo-img[src*="Transline"] {
+[data-theme="light"] .oem-logo-img[src*="transline"],
+[data-theme="light"] .oem-running-logo-img[src*="Transline"],
+[data-theme="light"] .oem-running-logo-img[src*="transline"] {
   max-height: 44px !important;
   width: auto !important;
   max-width: 90% !important;
@@ -13986,4 +14006,17 @@ img, video, iframe {
   display: block;
   margin: 0 auto;
   filter: none !important;
+}
+
+/* PowerRF: Display authentic logo crisply across Dark and Light modes */
+.partner-logo-img[src*="powerrf"],
+.partner-logo-img[src*="PowerRF"],
+.oem-running-logo-img[src*="powerrf"],
+.oem-running-logo-img[src*="PowerRF"] {
+  max-height: 62px !important;
+  width: auto !important;
+  max-width: 90% !important;
+  object-fit: contain !important;
+  display: block;
+  margin: 0 auto;
 }
