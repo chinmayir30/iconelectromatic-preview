@@ -414,7 +414,7 @@ export function renderHomePage() {
                 <textarea id="h-message" rows="4" placeholder="Specify part numbers, frequency range, operational parameters, and delivery timeline..." required></textarea>
               </div>
 
-              <input class="turnstile-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+              <input class="turnstile-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:0;height:0;opacity:0;pointer-events:none;border:0;padding:0;margin:0;background:transparent;" />
               <div id="home-turnstile-widget" class="turnstile-widget" data-turnstile-action="contact_enquiry" role="group" aria-label="Security verification"></div>
               <p id="home-turnstile-status" class="turnstile-status" role="status" aria-live="polite"></p>
               <p id="home-contact-status" class="turnstile-status turnstile-error" role="alert" aria-live="assertive"></p>

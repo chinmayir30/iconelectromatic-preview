@@ -318,7 +318,7 @@ export function renderContactPage() {
                   <i class="fa-solid fa-paper-plane"></i> Send Message to Engineering Team
                 </button>
                 <!-- Honeypot: hidden from real users, filled by bots -->
-                <input class="turnstile-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                <input class="turnstile-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:0;height:0;opacity:0;pointer-events:none;border:0;padding:0;margin:0;background:transparent;" />
                 <div id="inquiry-form-error" role="alert" aria-live="assertive" style="display:none;margin-top:var(--space-3);padding:10px 14px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.35);border-radius:var(--radius-md);color:#fca5a5;font-size:0.88rem;"></div>
               </form>
             </div>
@@ -430,7 +430,7 @@ export function renderContactPage() {
                   <i class="${careers.submitButtonIcon || 'fa-solid fa-briefcase'}"></i> ${careers.submitButtonText || 'Submit Engineering Application'}
                 </button>
                 <!-- Honeypot: hidden from real users, filled by bots -->
-                <input class="turnstile-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+                <input class="turnstile-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;width:0;height:0;opacity:0;pointer-events:none;border:0;padding:0;margin:0;background:transparent;" />
                 <div id="careers-form-error" role="alert" aria-live="assertive" style="display:none;margin-top:var(--space-3);padding:10px 14px;background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.35);border-radius:var(--radius-md);color:#fca5a5;font-size:0.88rem;"></div>
               </form>
             </div>
