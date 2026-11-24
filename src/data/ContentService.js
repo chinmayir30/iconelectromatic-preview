@@ -960,6 +960,14 @@ export const ContentService = {
             website: 'https://translinetech.com'
           };
           if (parsed && Array.isArray(parsed.partners)) {
+            const defPartners = INITIAL_CONTENT.partners.partners || [];
+            const defLogoMap = new Map(defPartners.map(p => [p.id, p.logoImg]));
+            parsed.partners.forEach(p => {
+              const freshLogo = defLogoMap.get(p.id);
+              if (freshLogo && (!p.logoImg || p.logoImg.includes('oem-logos/'))) {
+                p.logoImg = freshLogo;
+              }
+            });
             parsed.partners = parsed.partners.filter(p => p.id !== 'fortify' && p.id !== '3dfortify');
             if (!parsed.partners.some(p => p.id === 'transline-technology' || p.id === 'transline')) {
               parsed.partners.push(translinePartner);
@@ -1020,16 +1028,51 @@ export const ContentService = {
               highlightCards.push(defHl);
             }
           });
+          let milestones = Array.isArray(parsed.milestones) ? parsed.milestones.map((m, idx) => {
+            const defM = defaults.milestones[idx];
+            if (defM && (!m.image || m.image.includes('timeline-') || m.image.includes('pillar-'))) {
+              return { ...m, image: defM.image };
+            }
+            return m;
+          }) : defaults.milestones;
           const merged = {
             ...defaults,
             ...parsed,
-            highlightCards
+            highlightCards,
+            milestones
+          };
+          _memoryCache.set(pageKey, merged);
+          return merged;
+        } else if (pageKey === 'services') {
+          const defaults = INITIAL_CONTENT.services;
+          let services = Array.isArray(parsed.services) ? parsed.services.map((s, sIdx) => {
+            const defS = defaults.services[sIdx];
+            if (!defS) return s;
+            const slides = Array.isArray(s.slides) ? s.slides.map((sl, slIdx) => {
+              const defSl = defS.slides && defS.slides[slIdx];
+              if (defSl && (!sl.image || sl.image.includes('hero-amplifier') || sl.image.includes('gan-power') || sl.image.includes('defense-satcom') || sl.image.includes('rf-waveguide') || sl.image.includes('rf-switch') || sl.image.includes('rf-microwave-pcb'))) {
+                return { ...sl, image: defSl.image };
+              }
+              return sl;
+            }) : defS.slides;
+            return { ...s, slides };
+          }) : defaults.services;
+          const merged = {
+            ...defaults,
+            ...parsed,
+            services
           };
           _memoryCache.set(pageKey, merged);
           return merged;
         } else if (pageKey === 'home') {
           const defaults = INITIAL_CONTENT.home;
-          let eventCards = Array.isArray(parsed.eventCards) ? [...parsed.eventCards] : [...defaults.eventCards];
+          let eventCards = Array.isArray(parsed.eventCards) ? parsed.eventCards.map((c, idx) => {
+            const defC = defaults.eventCards[idx];
+            if (defC && (!c.image || c.image === '/images/defense-satcom.jpg' || c.image.includes('pillar-') || c.image.includes('domain-'))) {
+              return { ...c, image: defC.image };
+            }
+            return c;
+          }) : [...defaults.eventCards];
           if (eventCards.length === 0) {
             eventCards = [...defaults.eventCards];
           }
