@@ -144,7 +144,9 @@ export function renderHomePage() {
       <div class="container" style="position:relative;z-index:3;width:100%;">
         <div class="hero-relay-content">
           <h1 class="hero-title-giant">
-            ${data.heroTitle || 'World-Class RF & Microwave<br>Technologies Through<br><span class="accent-red" style="color: var(--logo-red);">Trusted Representation & Distribution.</span>'}
+            ${(data.heroTitle && data.heroTitle.includes('<br>'))
+              ? data.heroTitle
+              : 'World-Class RF & Microwave<br>Technologies Through<br><span class="accent-red" style="color: var(--logo-red);">Trusted Representation & Distribution.</span>'}
           </h1>
 
           <p class="hero-description-clean">

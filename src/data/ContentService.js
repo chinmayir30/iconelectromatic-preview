@@ -1099,9 +1099,14 @@ export const ContentService = {
             ...parsed,
             eventCards
           };
-          if (!merged.heroTitle || merged.heroTitle.includes('turns complex high-frequency') || merged.heroTitle.includes('Icon Electromatic is a provider')) {
+          if (!merged.heroTitle || !merged.heroTitle.includes('<br>') || merged.heroTitle.includes('turns complex high-frequency') || merged.heroTitle.includes('Icon Electromatic is a provider')) {
             merged.heroTitle = defaults.heroTitle;
             merged.heroSubtitle = defaults.heroSubtitle;
+            try {
+              if (typeof localStorage !== 'undefined') {
+                localStorage.setItem('cms_home', JSON.stringify(merged));
+              }
+            } catch (_) {}
           }
           _memoryCache.set(pageKey, merged);
           return merged;
