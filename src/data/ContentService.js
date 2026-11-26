@@ -43,7 +43,7 @@ const INITIAL_CONTENT = {
     youtubeUrl: '#',
   },
   home: {
-    heroTitle: 'World-Class RF & Microwave Technologies Through <span class="accent-red" style="color: var(--logo-red);">Trusted Representation & Distribution.</span>',
+    heroTitle: 'World-Class RF & Microwave<br>Technologies Through<br><span class="accent-red" style="color: var(--logo-red);">Trusted Representation & Distribution.</span>',
     heroSubtitle: 'Partnering with industry-leading suppliers, we bring innovative technologies, engineering support, and seamless supply-chain services to accelerate your success.',
     heroBgVideo: '/icon-video.mp4',
     heroBgImage: '/images/hero-new-bg.png',
