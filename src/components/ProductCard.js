@@ -84,7 +84,7 @@ export function renderProductCard(product, index = 0) {
         <a href="${detailRoute}" style="display:block;width:100%;height:100%;text-decoration:none;" title="View ${name} Specifications">
           <img src="${displayImage}" alt="${name}" loading="lazy" onerror="this.onerror=null; this.src='/images/rf-filter.jpg';" />
         </a>
-        <div class="relay-oem-pill relay-oem-logo-pill" style="border: 1px solid rgba(255,255,255,0.25);" title="${oemName}">
+        <div class="relay-oem-pill relay-oem-logo-pill" title="${oemName}">
           ${resolvedLogo ? `
             <img src="${resolvedLogo}" alt="${oemName}" class="relay-oem-pill-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';" />
             <span class="relay-oem-pill-text" style="display:none;">${oemName}</span>

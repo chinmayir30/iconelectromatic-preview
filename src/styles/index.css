@@ -921,23 +921,25 @@ body[data-page="blog"] .logo-container img,
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   font-family: var(--font-display);
-  font-size: 0.72rem;
+  font-size: 0.70rem;
   font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 6px;
-  letter-spacing: 0.04em;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
   z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 28px;
+  height: 20px;
+  min-height: 20px;
   background: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .relay-oem-pill-img {
-  height: 18px;
-  max-width: 72px;
+  height: 12px;
+  max-width: 44px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -946,14 +948,14 @@ body[data-page="blog"] .logo-container img,
 .relay-oem-pill-text {
   color: #0f172a;
   font-weight: 700;
-  font-size: 0.72rem;
-  line-height: 1.2;
+  font-size: 0.70rem;
+  line-height: 1;
 }
 
 [data-theme="light"] .products-dark-section .relay-oem-pill {
   background: #ffffff !important;
   border: 1px solid rgba(0, 0, 0, 0.12) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
 }
 
 [data-theme="light"] .products-dark-section .relay-oem-pill .relay-oem-pill-text {

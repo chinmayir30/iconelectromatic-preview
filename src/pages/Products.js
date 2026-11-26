@@ -865,12 +865,12 @@ function renderProductCard(product, index, oem, cat) {
         <div class="product-card-img-gradient"></div>
 
         <!-- OEM Mini-Badge Overlay -->
-        <div class="product-card-oem-overlay" style="background: #ffffff; border: 1px solid rgba(0,0,0,0.1); border-radius: 6px; padding: 3px 8px; display: inline-flex; align-items: center; justify-content: center; min-height: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.35);" title="${oem.name || oem.shortName}">
+        <div class="product-card-oem-overlay" style="background: #ffffff; border: 1px solid rgba(0,0,0,0.12); border-radius: 4px; padding: 2px 7px; display: inline-flex; align-items: center; justify-content: center; height: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.25); top: 10px; left: 10px;" title="${oem.name || oem.shortName}">
           ${oem.logoImg ? `
-            <img src="${ContentService.resolveImg(oem.logoImg)}" alt="${oem.name || oem.shortName}" style="max-height: 16px; max-width: 65px; object-fit: contain; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
-            <span style="display:none; color: ${oem.accentColor}; font-weight: 800; font-size: 0.72rem; letter-spacing: 0.05em;">${oem.shortName}</span>
+            <img src="${ContentService.resolveImg(oem.logoImg)}" alt="${oem.name || oem.shortName}" style="height: 12px; max-width: 44px; object-fit: contain; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+            <span style="display:none; color: #0f172a; font-weight: 700; font-size: 0.70rem;">${oem.shortName}</span>
           ` : `
-            <span style="color: ${oem.accentColor}; font-weight: 800; font-size: 0.72rem; letter-spacing: 0.05em;">${oem.shortName}</span>
+            <span style="color: #0f172a; font-weight: 700; font-size: 0.70rem;">${oem.shortName}</span>
           `}
         </div>
 
