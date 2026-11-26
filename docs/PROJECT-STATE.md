@@ -10,7 +10,7 @@ an indexable page with unique content, and that is handed over with documentatio
 client-owned accounts and one year of maintenance.
 
 ## Current stage
-Phase 6 - Final handover corrections and verification. Hero headline formatted into three lines (2026-11-26). Production deployment
+Phase 6 - Final handover corrections and verification. Hero headline formatted into three lines; product card OEM badges replaced with authentic brand logos on Home and Products catalog cards (2026-11-26). Production deployment
 and recovery operations remain client-owned and have not started; frontend CSP
 enforcement remains deferred until the host and approved resource origins are
 confirmed and report-only checks are complete.

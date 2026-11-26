@@ -5,6 +5,7 @@
  */
 
 import { ContentService } from '../data/ContentService.js';
+import { CATALOG } from '../../shared/catalogData.js';
 
 export function getProductDisplayImage(product) {
   if (product.image) return ContentService.resolveImg(product.image);
@@ -73,14 +74,23 @@ export function renderProductCard(product, index = 0) {
       ? `/products?level=products&oem=${encodeURIComponent(product.oemId)}&category=${encodeURIComponent(product.catId)}`
       : `/products`);
 
+  // Resolve OEM logo image if available (e.g. Rogers, Qorvo, Mini-Circuits)
+  const oemLogoSrc = product.oemLogoImg || (product.oemId ? CATALOG.find(o => o.id === product.oemId)?.logoImg : null);
+  const resolvedLogo = oemLogoSrc ? ContentService.resolveImg(oemLogoSrc) : null;
+
   return `
     <div class="product-card-relay" style="--oem-accent: ${oemAccent};">
       <div class="product-card-relay-img">
         <a href="${detailRoute}" style="display:block;width:100%;height:100%;text-decoration:none;" title="View ${name} Specifications">
           <img src="${displayImage}" alt="${name}" loading="lazy" onerror="this.onerror=null; this.src='/images/rf-filter.jpg';" />
         </a>
-        <div class="relay-oem-pill" style="border: 1px solid ${oemAccent}40; background: rgba(10,15,30,0.85); color: #ffffff;">
-          ${oemName}
+        <div class="relay-oem-pill relay-oem-logo-pill" style="border: 1px solid rgba(255,255,255,0.25);" title="${oemName}">
+          ${resolvedLogo ? `
+            <img src="${resolvedLogo}" alt="${oemName}" class="relay-oem-pill-img" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';" />
+            <span class="relay-oem-pill-text" style="display:none;">${oemName}</span>
+          ` : `
+            <span class="relay-oem-pill-text">${oemName}</span>
+          `}
         </div>
       </div>
       <div class="product-card-relay-body">
