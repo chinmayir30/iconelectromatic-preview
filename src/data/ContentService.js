@@ -43,7 +43,7 @@ const INITIAL_CONTENT = {
     youtubeUrl: '#',
   },
   home: {
-    heroTitle: 'World-Class RF & Microwave<br>Technologies Through<br><span class="accent-red" style="color: var(--logo-red);">Trusted Representation & Distribution.</span>',
+    heroTitle: '<span class="hero-line">World-Class RF & Microwave</span><span class="hero-line">Technologies Through</span><span class="accent-red hero-line" style="color: var(--logo-red);">Trusted Representation & Distribution.</span>',
     heroSubtitle: 'Partnering with industry-leading suppliers, we bring innovative technologies, engineering support, and seamless supply-chain services to accelerate your success.',
     heroBgVideo: '/icon-video.mp4',
     heroBgImage: '/images/hero-new-bg.png',
@@ -1099,7 +1099,7 @@ export const ContentService = {
             ...parsed,
             eventCards
           };
-          if (!merged.heroTitle || !merged.heroTitle.includes('<br>') || merged.heroTitle.includes('turns complex high-frequency') || merged.heroTitle.includes('Icon Electromatic is a provider')) {
+          if (!merged.heroTitle || !merged.heroTitle.includes('hero-line') || merged.heroTitle.includes('turns complex high-frequency') || merged.heroTitle.includes('Icon Electromatic is a provider')) {
             merged.heroTitle = defaults.heroTitle;
             merged.heroSubtitle = defaults.heroSubtitle;
             try {
