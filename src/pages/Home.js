@@ -217,10 +217,10 @@ export function renderHomePage() {
       <div class="container">
         <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:var(--space-10);flex-wrap:wrap;gap:var(--space-4);">
           <div>
-            <h2 class="section-tag-mono red-section-title" style="font-size: 2.75rem; font-weight: 800; letter-spacing: 0.05em; margin: 0; line-height: 1.2;">${data.insightsTitle || 'Insights'}</h2>
-            <h3 class="section-h2" style="font-size: 2rem; font-weight: 600; line-height: 1.3; margin-top: 8px; margin-bottom: 0;">${data.insightsSubtitle || 'Latest Blogs'}</h3>
-            <p class="section-lead">
-              ${data.insightsLead || 'Engineering articles, application notes, and microwave design breakthroughs from our technical team.'}
+            <h2 class="section-tag-mono red-section-title" style="font-size: 2.75rem; font-weight: 800; letter-spacing: 0.05em; margin: 0; line-height: 1.2;">${escapeHtml(data.insightsTitle || 'Insights')}</h2>
+            <h3 class="section-h2" style="font-size: 2rem; font-weight: 600; line-height: 1.3; margin-top: 8px; margin-bottom: 16px;">${escapeHtml(data.insightsSubtitle || 'Latest Blogs')}</h3>
+            <p class="section-lead" style="font-size: 1.25rem; max-width: 800px; margin: 0;">
+              ${escapeHtml(data.insightsLead || 'Engineering articles, application notes, and microwave design breakthroughs from our technical team.')}
             </p>
           </div>
           <div>
