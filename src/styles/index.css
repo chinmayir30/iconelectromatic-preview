@@ -4600,8 +4600,12 @@ html[data-theme="light"],
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
 }
 
+.hero-inline-stats {
+  border-top: none !important;
+}
+
 [data-theme="light"] .hero-inline-stats {
-  border-top: 1px solid #cbd5e1 !important;
+  border-top: none !important;
 }
 
 [data-theme="light"] .hero-inline-stats .hero-stat-number {

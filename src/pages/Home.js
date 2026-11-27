@@ -163,7 +163,7 @@ export function renderHomePage() {
           </div>
 
           <!-- Integrated Stats -->
-          <div class="hero-inline-stats" style="margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.2); display: flex; justify-content: space-between; align-items: center; max-width: 760px; gap: 20px;">
+          <div class="hero-inline-stats" style="margin-top: 60px; padding-top: 30px; border-top: none; display: flex; justify-content: space-between; align-items: center; max-width: 760px; gap: 20px;">
             ${statsList.map(st => `
               <div class="hero-stat-item" style="flex-direction: column; align-items: flex-start; gap: 4px;">
                 <span class="hero-stat-number" style="color: var(--logo-red); font-size: ${st.value && st.value.length > 5 ? '1.35rem' : '1.8rem'}; line-height: 1.15; white-space: nowrap;">${st.value}</span>
