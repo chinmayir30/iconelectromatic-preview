@@ -4890,18 +4890,11 @@ html[data-theme="light"],
 }
 
 /* OEM Company Pill */
-[data-theme="light"] .products-dark-section .relay-oem-pill {
-  color: #ffffff !important;
-  background: #0f1d3d !important;
-  border: 1px solid rgba(15, 29, 61, 0.2) !important;
-  font-weight: 700 !important;
-  text-shadow: none !important;
-}
-
+[data-theme="light"] .products-dark-section .relay-oem-pill,
 [data-theme="light"] .products-dark-section .product-card-relay:hover .relay-oem-pill {
-  color: #ffffff !important;
-  background: #0b1a3d !important;
-  border-color: #0b1a3d !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
 }
 
 [data-theme="light"] .products-dark-section .relay-cat-label {
@@ -11619,13 +11612,12 @@ html[data-theme="light"],
 }
 
 [data-theme="light"] .product-card-oem-overlay {
-  background: #123b7a !important;
-  color: #ffffff !important;
-  font-weight: 700 !important;
-  box-shadow: 0 2px 8px rgba(18, 59, 122, 0.3) !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
 }
 [data-theme="light"] .product-card-oem-overlay span {
-  color: #ffffff !important;
+  color: #0f172a !important;
 }
 
 [data-theme="light"] .product-card-cat-overlay {
