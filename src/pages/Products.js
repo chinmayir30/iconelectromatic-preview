@@ -898,7 +898,7 @@ function renderProductCard(product, index, oem, cat) {
             </span>
             <div class="product-card-apps-tags">
               ${apps.map(app => `
-                <span class="product-app-pill" style="border-color:${oem.accentColor}30; background:${oem.accentColor}10; color:#E2E8F0;">
+                <span class="product-app-pill" style="border-color:${oem.accentColor}30; background:${oem.accentColor}10; color:#E2E8F0;" title="${app}">
                   ${app}
                 </span>
               `).join('')}

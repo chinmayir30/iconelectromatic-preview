@@ -1010,6 +1010,7 @@ body[data-page="blog"] .logo-container img,
   flex-wrap: wrap;
   gap: 6px;
   margin-bottom: 14px;
+  max-width: 100%;
 }
 
 .relay-spec-tag {
@@ -1022,7 +1023,20 @@ body[data-page="blog"] .logo-container img,
   color: #CBD5E1;
   display: inline-flex;
   align-items: center;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
   white-space: nowrap;
+}
+
+.relay-spec-tag span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.relay-spec-tag i {
+  flex-shrink: 0;
 }
 
 .product-card-relay-footer {
@@ -8283,6 +8297,7 @@ html[data-theme="light"],
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+  max-width: 100%;
 }
 
 .product-app-pill {
@@ -8292,6 +8307,13 @@ html[data-theme="light"],
   border: 1px solid;
   font-weight: 500;
   line-height: 1.35;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .product-card-footer {

@@ -106,7 +106,7 @@ export function renderProductCard(product, index = 0) {
         ${appTags.length ? `
           <div class="relay-specs-brief">
             ${appTags.map(tag => `
-              <div class="relay-spec-tag">
+              <div class="relay-spec-tag" title="${tag}">
                 <i class="fa-solid fa-circle-dot" style="color:${oemAccent};font-size:0.5rem;margin-right:5px;"></i>
                 <span>${tag}</span>
               </div>
