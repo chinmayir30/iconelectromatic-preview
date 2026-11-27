@@ -283,11 +283,8 @@ export function renderContactPage() {
                 <div class="relay-form-row">
                   <div class="relay-field">
                     <label for="c-region">Target Office / Region *</label>
-                    <select id="c-region" name="region" required>
-                      <option value="" disabled selected>Select an Office...</option>
-                      <option value="india">India (Bengaluru HQ)</option>
-                      <option value="singapore">Singapore Liaison Office</option>
-                      <option value="usa">USA Liaison Office</option>
+                    <select id="c-region" name="region" required style="cursor: default; pointer-events: none; opacity: 0.9;" tabindex="-1" aria-readonly="true">
+                      <option value="india" selected>India (Bengaluru HQ)</option>
                     </select>
                   </div>
                   <div class="relay-field">

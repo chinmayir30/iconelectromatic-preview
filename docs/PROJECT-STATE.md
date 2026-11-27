@@ -10,7 +10,7 @@ an indexable page with unique content, and that is handed over with documentatio
 client-owned accounts and one year of maintenance.
 
 ## Current stage
-Phase 6 - Final handover corrections and verification. Hero headline formatted into three lines; product card OEM logos sized to compact 20px badge footprint matching original text label in corner; divider line above hero stats removed in dark and light themes; product card application badges constrained with max-width and ellipsis to ensure proper alignment without overflowing cards; Insights section header line spacing and typography aligned with Events section header; light theme secondary text color darkened from #334155 to #1e293b for higher contrast and legibility (2026-11-27). Production deployment
+Phase 6 - Final handover corrections and verification. Hero headline formatted into three lines; product card OEM logos sized to compact 20px badge footprint matching original text label in corner; divider line above hero stats removed in dark and light themes; product card application badges constrained with max-width and ellipsis to ensure proper alignment without overflowing cards; Insights section header line spacing and typography aligned with Events section header; light theme secondary text color darkened from #334155 to #1e293b for higher contrast and legibility; Contact Us form Target Office field locked strictly to India (Bengaluru HQ) (2026-11-27). Production deployment
 and recovery operations remain client-owned and have not started; frontend CSP
 enforcement remains deferred until the host and approved resource origins are
 confirmed and report-only checks are complete.
